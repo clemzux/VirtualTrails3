@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VirtualTrails</string>
+    <string name="title_activity_chome_map_ctrl">Map</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_cconfigure_route_ctrl">Map</string>
+    <string name="title_activity_cconfigure_display_ctrl">CConfigureDisplayCtrl</string>
+    <string name="title_activity_cconsult_statistics_ctrl">CConsultStatisticsCtrl</string>
+    <string name="title_activity_cmanage_friends_ctrl">CManageFriendsCtrl</string>
+    <string name="title_activity_claunch_route_ctrl">CLaunchRouteCtrl</string>
+    <string name="title_activity_cadd_itineraire_ctrl">Map</string>
+</resources>

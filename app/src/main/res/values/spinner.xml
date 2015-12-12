@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="home_menu_list">
+        <item>Accueil</item>
+        <item>Configuration</item>
+        <item>Gérer amis</item>
+        <item>Consulter statistiques</item>
+        <item>Gérer itinéraires</item>
+        <item>Lancer itinéraire</item>
+        <item>Où sont mes amis ?</item>
+    </string-array>
+
+    <string-array name="disp_menu_list">
+        <item>Configuration</item>
+        <item>Accueil</item>
+        <item>Gérer amis</item>
+        <item>Consulter statistiques</item>
+        <item>Gérer itinéraires</item>
+        <item>Lancer itinéraire</item>
+        <item>Où sont mes amis ?</item>
+    </string-array>
+
+    <string-array name="conf_route_menu_list">
+        <item>Gérer itinéraires</item>
+        <item>Accueil</item>
+        <item>Configuration</item>
+        <item>Gérer amis</item>
+        <item>Consulter statistiques</item>
+        <item>Lancer itinéraire</item>
+        <item>Où sont mes amis ?</item>
+    </string-array>
+
+    <string-array name="consult_stat_menu_list">
+        <item>Consulter statistiques</item>
+        <item>Accueil</item>
+        <item>Configuration</item>
+        <item>Gérer amis</item>
+        <item>Gérer itinéraires</item>
+        <item>Lancer itinéraire</item>
+        <item>Où sont mes amis ?</item>
+    </string-array>
+
+    <string-array name="manage_friends_menu_list">
+        <item>Gérer amis</item>
+        <item>Accueil</item>
+        <item>Configuration</item>
+        <item>Consulter statistiques</item>
+        <item>Gérer itinéraires</item>
+        <item>Lancer itinéraire</item>
+        <item>Où sont mes amis ?</item>
+    </string-array>
+
+    <string-array name="launch_route_list">
+        <item>Lancer itinéraire</item>
+        <item>Accueil</item>
+        <item>Configuration</item>
+        <item>Gérer amis</item>
+        <item>Consulter statistiques</item>
+        <item>Gérer itinéraires</item>
+        <item>Où sont mes amis ?</item>
+    </string-array>
+</resources>
