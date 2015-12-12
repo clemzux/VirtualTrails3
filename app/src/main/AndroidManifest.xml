@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.virtualtrails" >
+    package="fr.virtualtrails">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -16,7 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -39,7 +39,7 @@
 
         <activity
             android:name=".homeMap.CHomeMapCtrl"
-            android:label="@string/title_activity_chome_map_ctrl" >
+            android:label="@string/title_activity_chome_map_ctrl">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
         </activity>
         <activity
             android:name=".configureRoute.CConfigureRouteCtrl"
-            android:label="@string/title_activity_cconfigure_route_ctrl" >
+            android:label="@string/title_activity_cconfigure_route_ctrl">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
@@ -57,7 +57,7 @@
             android:name=".configureDisplay.CConfigureDisplayCtrl"
             android:label="@string/title_activity_cconfigure_display_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
@@ -66,7 +66,7 @@
             android:name=".consultStatistics.CConsultStatisticsCtrl"
             android:label="@string/title_activity_cconsult_statistics_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
@@ -75,7 +75,7 @@
             android:name=".manageFriends.CManageFriendsCtrl"
             android:label="@string/title_activity_cmanage_friends_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
@@ -84,18 +84,19 @@
             android:name=".launchRoute.CLaunchRouteCtrl"
             android:label="@string/title_activity_claunch_route_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
         </activity>
         <activity
             android:name=".configureRoute.CAddItineraireCtrl"
-            android:label="@string/title_activity_cadd_itineraire_ctrl" >
+            android:label="@string/title_activity_cadd_itineraire_ctrl">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.configureRoute.CConfigureRouteCtrl" />
         </activity>
+        <activity android:name=".manageFriends.CAddFriendsCtrl"></activity>
     </application>
 
 </manifest>

@@ -5,21 +5,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.parse.Parse;
 import com.parse.ParseObject;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
@@ -37,7 +31,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     String[] prenoms = new String[]{
             "Ami 1", "Ami 2", "Ami 3"};
 
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends;
+    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +39,16 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         setContentView(R.layout.manage_friends_gui);
 
         mListView = (ListView) findViewById(R.id.listView);
+        // On charge un tableau avec la liste des prenoms de la listeview
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CManageFriendsCtrl.this, android.R.layout.simple_list_item_1, prenoms);
+        // On affiche la liste View avec les prénoms
         mListView.setAdapter(adapter);
 
         managefriends = getIntent();
         initWidgets();
         initActivity();
+
+
     }
 
     public void initActivity(){
@@ -61,6 +59,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         consultStatistics = new Intent(this, CConsultStatisticsCtrl.class);
         managefriends = new Intent(this, CManageFriendsCtrl.class);
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
+        addFriends = new Intent(this, CAddFriendsCtrl.class);
     }
 
     public void initWidgets(){
@@ -121,12 +120,13 @@ public class CManageFriendsCtrl extends AppCompatActivity {
 
     public void testbdd(View v){
 
-        ParseObject salut = new ParseObject("friend");
-        salut.put("id", 2);
-        salut.put("pseudo", "mahmoud");
-        salut.saveInBackground();
     }
 
+    public void addFriends(View v){
+
+        startActivity(addFriends);
+    }
+// Controleur de la ListeView
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Do something when a list item is clicked
         // see http://developer.android.com/guide/topics/ui/layout/listview.html

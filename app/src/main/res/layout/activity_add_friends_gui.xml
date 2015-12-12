@@ -12,35 +12,41 @@
         android:layout_margin="10dp">
 
         <Spinner
-            android:id="@+id/manage_friends_menu"
+            android:id="@+id/disp_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/manage_friends_informative_part"
+            android:id="@+id/disp_informative_part"
             android:text="Clemzux"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-    <Button
-        android:id="@+id/conf_route_add_route"
-        android:text="+"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:onClick="addFriends"/>
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/boutonbdd"
-        android:text="ajout bdd"
+    <EditText
+        android:id="@+id/edit_pseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="testbdd"/>
-
-
+        android:text="Choisissez un pseudo "
+        />
+    <EditText
+        android:id="@+id/edit_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Num téléphone"
+        android:inputType="number"
+        />
+    <EditText
+        android:id="@+id/edit_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mail "
+        />
+    <Button
+        android:id="@+id/bouton_valider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validez !"
+        android:onClick="addFriendSql"/>
 
 </LinearLayout>

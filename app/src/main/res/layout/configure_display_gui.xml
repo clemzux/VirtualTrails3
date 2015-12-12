@@ -57,6 +57,7 @@
         android:text="distance restante" />
 
     <Button
+        android:id="@+id/bouton_valider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Validez !"/>
