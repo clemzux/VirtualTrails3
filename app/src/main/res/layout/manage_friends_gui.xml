@@ -23,6 +23,15 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+    <Button
+        android:id="@+id/conf_route_add_route"
+        android:text="+"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" />
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/boutonbdd"
@@ -30,5 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="testbdd"/>
+
+
 
 </LinearLayout>

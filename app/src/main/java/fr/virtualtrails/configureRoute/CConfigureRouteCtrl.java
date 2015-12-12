@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -27,6 +28,9 @@ import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
 
 public class CConfigureRouteCtrl extends AppCompatActivity {
 
+    ListView mListView;
+    String[] prenoms = new String[]{
+            "itinéraire 1", "itinéraire 2", "itinéraire 3"};
     private GoogleMap mMap;
     private Spinner menu;
     private TextView informativePart;
@@ -39,11 +43,12 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configure_route_gui);
-
+        mListView = (ListView) findViewById(R.id.listView);
         ////////////////////////////
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CConfigureRouteCtrl.this, android.R.layout.simple_list_item_1, prenoms);
+        mListView.setAdapter(adapter);
         configureRoute = getIntent();
-
         initActivity();
         initWidgets();
     }
@@ -118,5 +123,10 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
     public void addRoute(View v){
 
         startActivity(addItineraire);
+    }
+
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // Do something when a list item is clicked
+        // see http://developer.android.com/guide/topics/ui/layout/listview.html
     }
 }

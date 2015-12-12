@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,12 +33,20 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
+    ListView mListView;
+    String[] prenoms = new String[]{
+            "Ami 1", "Ami 2", "Ami 3"};
+
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_friends_gui);
+
+        mListView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CManageFriendsCtrl.this, android.R.layout.simple_list_item_1, prenoms);
+        mListView.setAdapter(adapter);
 
         managefriends = getIntent();
         initWidgets();
@@ -116,6 +125,11 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         salut.put("id", 2);
         salut.put("pseudo", "mahmoud");
         salut.saveInBackground();
+    }
+
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // Do something when a list item is clicked
+        // see http://developer.android.com/guide/topics/ui/layout/listview.html
     }
 
 }
