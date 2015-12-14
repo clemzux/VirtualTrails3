@@ -43,7 +43,8 @@
             android:id="@+id/add_route_button"
             android:text="Enregistrer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:onClick="saveRoute"/>
 
     </LinearLayout>
 

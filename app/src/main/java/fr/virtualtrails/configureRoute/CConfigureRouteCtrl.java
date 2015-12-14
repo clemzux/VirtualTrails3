@@ -1,7 +1,6 @@
 package fr.virtualtrails.configureRoute;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,12 +11,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
@@ -29,12 +23,11 @@ import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
 public class CConfigureRouteCtrl extends AppCompatActivity {
 
     ListView mListView;
-    String[] prenoms = new String[]{
-            "itinéraire 1", "itinéraire 2", "itinéraire 3"};
+    //String[] routeName = new String[]{
+    //        "itinéraire 1", "itinéraire 2", "itinéraire 3"};
     private GoogleMap mMap;
     private Spinner menu;
     private TextView informativePart;
-    private Button addRoute;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addItineraire;
 
@@ -43,12 +36,11 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configure_route_gui);
-        mListView = (ListView) findViewById(R.id.listView);
+
         ////////////////////////////
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CConfigureRouteCtrl.this, android.R.layout.simple_list_item_1, prenoms);
-        mListView.setAdapter(adapter);
         configureRoute = getIntent();
+
         initActivity();
         initWidgets();
     }
@@ -61,18 +53,20 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         consultStatistics = new Intent(this, CConsultStatisticsCtrl.class);
         managefriends = new Intent(this, CManageFriendsCtrl.class);
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
-        addItineraire = new Intent(this, CAddItineraireCtrl.class);
+        addItineraire = new Intent(this, CAddRouteCtrl.class);
     }
 
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.conf_route_informative_part);
 
+        // remplissage menu
+
         menu = (Spinner) findViewById(R.id.conf_route_menu);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapterMenu = ArrayAdapter.createFromResource(this,
                 R.array.conf_route_menu_list, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        menu.setAdapter(adapter);
+        adapterMenu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        menu.setAdapter(adapterMenu);
 
         menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -82,9 +76,18 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
+
+        // remplissage listview
+
+        mListView = (ListView) findViewById(R.id.listView);
+
+        while (CConfigureRouteM.getInstance().routeList == null);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CConfigureRouteCtrl.this, android.R.layout.simple_list_item_1,
+                CConfigureRouteM.getInstance().getRouteNames());
+        mListView.setAdapter(adapter);
 
         //a completer
         //CConfigureDisplay.getIns....
@@ -99,15 +102,15 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
                 break;
 
             case 2 :
-                startActivity(managefriends);
+                startActivity(configureDisplay);
                 break;
 
             case 3 :
-
+                startActivity(managefriends);
                 break;
 
             case 4 :
-                startActivity(configureRoute);
+                startActivity(consultStatistics);
                 break;
 
             case 5 :

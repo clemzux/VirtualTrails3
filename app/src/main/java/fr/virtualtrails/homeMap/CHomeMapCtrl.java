@@ -20,6 +20,7 @@ import com.parse.Parse;
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.CConfigureRouteCtrl;
+import fr.virtualtrails.configureRoute.CConfigureRouteM;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
@@ -52,6 +53,8 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
             Parse.initialize(this);
             CHomeMapM.getInstance().setBDDinitialized();
         }
+
+        launchHidenProcesses();
 
         initWidgets();
         initActivity();
@@ -144,5 +147,10 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
                 // realité augmentée
                 break;
         }
+    }
+
+    private void launchHidenProcesses() {
+
+        CConfigureRouteM.getInstance().ReadRouteNames();
     }
 }
