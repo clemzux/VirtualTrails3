@@ -32,6 +32,8 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
+    public ArrayList<String> frendsList = null;
+
     ListView mListView;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends;
@@ -42,6 +44,8 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_friends_gui);
         mListView = (ListView) findViewById(R.id.listView);
+
+
 
         //sql request read BDD
 
@@ -55,7 +59,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
                         ParseObject p = objects.get(i);
-                        cFriendList.setArray(p.getString("pseudo"));
+                        frendsList.add(p.getString("pseudo"));
                         Log.i("testbdd", "linked " + i + " " + CFriendList.array.get(i));
                     }
                 } else {
@@ -66,8 +70,8 @@ public class CManageFriendsCtrl extends AppCompatActivity {
             }
         });
 
-        String[] prenoms = new String[cFriendList.array.size()];
-        Log.i("testbdd", "taille prenomz : " + prenoms.length + " taille pseudos " + cFriendList.array.size());
+        //String[] prenoms = new String[cFriendList.array.size()];
+        //Log.i("testbdd", "taille prenomz : " + prenoms.length + " taille pseudos " + cFriendList.array.size());
         /*
         for (int j=0;j<linkedList.size();j++) {
             prenoms[j] = String.valueOf(linkedList.get(j));
