@@ -87,6 +87,7 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CConfigureRouteCtrl.this, android.R.layout.simple_list_item_1,
                 CConfigureRouteM.getInstance().getRouteNames());
+
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
