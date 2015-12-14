@@ -22,6 +22,7 @@ import java.util.List;
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.CConfigureRouteCtrl;
+import fr.virtualtrails.configureRoute.CConfigureRouteM;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
@@ -32,12 +33,10 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
-    public ArrayList<String> frendsList = null;
+
 
     ListView mListView;
-
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,41 +44,14 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         setContentView(R.layout.manage_friends_gui);
         mListView = (ListView) findViewById(R.id.listView);
 
-
-
         //sql request read BDD
 
-        ArrayList arrayList = new ArrayList();
-        final CFriendList cFriendList = new CFriendList(arrayList);
+        while (CManageFriendsM.getInstance().frendsList == null);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("friends");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CManageFriendsCtrl.this, android.R.layout.simple_list_item_1,
+                    CManageFriendsM.getInstance().getFriends());
 
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> objects, com.parse.ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        ParseObject p = objects.get(i);
-                        frendsList.add(p.getString("pseudo"));
-                        Log.i("testbdd", "linked " + i + " " + CFriendList.array.get(i));
-                    }
-                } else {
-                    Log.i("testbdd", "pb?");
-                }
-                Log.i("testbdd", "set appelé");
-                //cFriendList.setListFriends(linkedList);
-            }
-        });
-
-        //String[] prenoms = new String[cFriendList.array.size()];
-        //Log.i("testbdd", "taille prenomz : " + prenoms.length + " taille pseudos " + cFriendList.array.size());
-        /*
-        for (int j=0;j<linkedList.size();j++) {
-            prenoms[j] = String.valueOf(linkedList.get(j));
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CManageFriendsCtrl.this, android.R.layout.simple_list_item_1, prenoms);
-
-        mListView.setAdapter(adapter);*/
+        mListView.setAdapter(adapter);
 
         managefriends = getIntent();
         initWidgets();

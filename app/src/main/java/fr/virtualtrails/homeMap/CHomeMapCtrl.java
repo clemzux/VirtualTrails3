@@ -24,6 +24,7 @@ import fr.virtualtrails.configureRoute.CConfigureRouteM;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
+import fr.virtualtrails.manageFriends.CManageFriendsM;
 
 public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback {
 
@@ -152,5 +153,6 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
     private void launchHidenProcesses() {
 
         CConfigureRouteM.getInstance().ReadRouteNames();
+        CManageFriendsM.getInstance().ReadFriends();
     }
 }
