@@ -29,10 +29,11 @@ public class CConfigureRouteM {
         return ourInstance;
     }
 
+    //////// attibuts ////////
+
     public ArrayList<String> routeList = null;
 
-    private CConfigureRouteM() {
-    }
+    private CConfigureRouteM() {}
 
     public void ReadRouteNames() {
 

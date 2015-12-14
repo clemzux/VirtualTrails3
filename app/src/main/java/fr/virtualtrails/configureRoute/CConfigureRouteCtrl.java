@@ -89,6 +89,13 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
                 CConfigureRouteM.getInstance().getRouteNames());
         mListView.setAdapter(adapter);
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+        });
+
         //a completer
         //CConfigureDisplay.getIns....
     }
