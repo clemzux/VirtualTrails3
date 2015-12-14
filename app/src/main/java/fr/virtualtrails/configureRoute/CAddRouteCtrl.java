@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
@@ -23,11 +24,12 @@ import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
 
-public class CAddItineraireCtrl extends FragmentActivity implements OnMapReadyCallback {
+public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Spinner menu;
     private TextView informativePart;
+    private EditText routeName;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addItineraire;
 
@@ -39,6 +41,11 @@ public class CAddItineraireCtrl extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ////////////////////////////////
+
+        initWidgets();
+        initActivity();
     }
 
 
@@ -54,12 +61,47 @@ public class CAddItineraireCtrl extends FragmentActivity implements OnMapReadyCa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        mMap = googleMap;
+        CAddRouteM.getInstance().initModel((EditText) findViewById(R.id.add_route_name), mMap);
+
+        mMap.setTrafficEnabled(true);
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        // move camera to Paris
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(48.856614, 2.3522219000000177)));
+
+        // listener click sur la map
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                CAddRouteM.getInstance().clickMap(latLng);
+            }
+        });
+
+        // listener drag and drop waipoints
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+
+                CAddRouteM.getInstance().dragPoints(marker);
+            }
+        });
     }
 
     public void initActivity(){
@@ -70,14 +112,15 @@ public class CAddItineraireCtrl extends FragmentActivity implements OnMapReadyCa
         consultStatistics = new Intent(this, CConsultStatisticsCtrl.class);
         managefriends = new Intent(this, CManageFriendsCtrl.class);
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
-        addItineraire = new Intent(this, CAddItineraireCtrl.class);
+        addItineraire = new Intent(this, CAddRouteCtrl.class);
     }
 
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.conf_route_informative_part);
+        routeName = (EditText) findViewById(R.id.add_route_name);
 
-        menu = (Spinner) findViewById(R.id.conf_route_menu);
+        menu = (Spinner) findViewById(R.id.add_route_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.conf_route_menu_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -86,13 +129,11 @@ public class CAddItineraireCtrl extends FragmentActivity implements OnMapReadyCa
         menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 launchActivity(position);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         //a completer
@@ -127,5 +168,12 @@ public class CAddItineraireCtrl extends FragmentActivity implements OnMapReadyCa
                 // realité augmentée
                 break;
         }
+    }
+
+    // on sauvegarde l'itineraire dans la base de données
+
+    public void saveRoute(View v){
+
+        CAddRouteM.getInstance().saveRoute(String.valueOf(routeName.getText()));
     }
 }

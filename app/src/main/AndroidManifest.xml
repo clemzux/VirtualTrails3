@@ -90,7 +90,7 @@
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
         </activity>
         <activity
-            android:name=".configureRoute.CAddItineraireCtrl"
+            android:name=".configureRoute.CAddRouteCtrl"
             android:label="@string/title_activity_cadd_itineraire_ctrl">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
