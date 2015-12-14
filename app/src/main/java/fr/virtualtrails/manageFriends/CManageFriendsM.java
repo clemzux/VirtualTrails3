@@ -31,7 +31,6 @@ public class CManageFriendsM {
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
                 frendsList = new ArrayList<String>();
                 if (e == null) {
-
                     for (int i = 0; i < objects.size(); i++) {
                         ParseObject p = objects.get(i);
                         frendsList.add(p.getString("pseudo"));
