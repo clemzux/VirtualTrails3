@@ -27,14 +27,15 @@ public class CManageFriendsM {
 
     public void ReadFriends() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("friends");
-
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
+                frendsList = new ArrayList<String>();
                 if (e == null) {
+
                     for (int i = 0; i < objects.size(); i++) {
                         ParseObject p = objects.get(i);
                         frendsList.add(p.getString("pseudo"));
-                        Log.i("testbdd", "linked " + i + " " + CFriendList.array.get(i));
+                        Log.i("testbdd", "linked " + i + " " + frendsList.get(i));
                     }
                 } else {
                     Log.i("testbdd", "pb?");
@@ -48,9 +49,7 @@ public class CManageFriendsM {
     public String[] getFriends(){
 
         String[] friends = new String[frendsList.size()];
-
         int i =0;
-
         for (String s : frendsList)
             friends[i++] = s;
 
