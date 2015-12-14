@@ -11,7 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.text.ParseException;
+import java.util.List;
 
 import fr.virtualtrails.R;
 
@@ -37,9 +43,9 @@ public class CAddFriendsCtrl extends AppCompatActivity {
                 friend.saveInBackground();
                 Snackbar.make(view, "Ami ajouté !", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
                 // Si on a envie d'envoyer un mail via un mini-client
                 // sendEmail("azedine.game@gmail.com", mail.getText().toString());
+
             }
         });
 
@@ -63,6 +69,5 @@ public class CAddFriendsCtrl extends AppCompatActivity {
             Toast.makeText(CAddFriendsCtrl.this,
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
-
     }
 }
