@@ -175,5 +175,6 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
     public void saveRoute(View v){
 
         CAddRouteM.getInstance().saveRoute(String.valueOf(routeName.getText()));
+        startActivity(configureRoute);
     }
 }

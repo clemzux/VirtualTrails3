@@ -128,25 +128,6 @@ public class CAddRouteM {
 
     public void saveRoute(String pRouteName){
 
-        // save en ligne sur parse
-
-        /*ParseObject wp;
-
-        long now;
-
-        for (MarkerOptions m : itinéraire) {
-
-            wp = new ParseObject("coordonees");
-            wp.put("nomItineraire", pRouteName);
-            wp.put("latitude", m.getPosition().latitude);
-            wp.put("longitude", m.getPosition().longitude);
-            wp.saveInBackground();
-
-            now = System.currentTimeMillis();
-
-            while (System.currentTimeMillis() != now + 2000);
-        }*/
-
         Thread save = new Thread(new SaveRouteThread(pRouteName));
         save.run();
     }
@@ -179,6 +160,9 @@ public class CAddRouteM {
 
                 while (System.currentTimeMillis() != now + 3000);
             }
+
+            plo = new PolylineOptions();
+            ArrayList<MarkerOptions> itinéraire = new ArrayList<MarkerOptions>();
         }
     }
 }
