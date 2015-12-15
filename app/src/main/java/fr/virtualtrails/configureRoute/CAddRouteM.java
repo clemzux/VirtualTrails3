@@ -162,7 +162,7 @@ public class CAddRouteM {
             }
 
             plo = new PolylineOptions();
-            ArrayList<MarkerOptions> itinéraire = new ArrayList<MarkerOptions>();
+            itinéraire = new ArrayList<MarkerOptions>();
         }
     }
 }
