@@ -50,7 +50,6 @@ public class CConfigureRouteM {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
-
                 routeList = new ArrayList<String>();
                 String lastName = "string";
 
