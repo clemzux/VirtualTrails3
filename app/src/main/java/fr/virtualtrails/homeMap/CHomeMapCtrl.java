@@ -52,6 +52,7 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
             // connection a la base de données
             Parse.enableLocalDatastore(this);
             Parse.initialize(this);
+
             CHomeMapM.getInstance().setBDDinitialized();
         }
 
@@ -152,7 +153,6 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
 
     private void launchHidenProcesses() {
 
-        CConfigureRouteM.getInstance().ReadRouteNames();
         CManageFriendsM.getInstance().ReadFriends();
     }
 }

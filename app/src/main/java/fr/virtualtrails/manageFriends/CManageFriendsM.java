@@ -40,7 +40,7 @@ public class CManageFriendsM {
                     for (int i = 0; i < objects.size(); i++) {
                         p = objects.get(i);
                         frendsList.add(p.getString("pseudo"));
-                        Log.i("testbdd", "linked " + i + " " + CFriendList.array.get(i));
+                        //Log.i("testbdd", "linked " + i + " " + CFriendList.array.get(i));
                     }
                 } else {
                     Log.i("testbdd", "pb?");

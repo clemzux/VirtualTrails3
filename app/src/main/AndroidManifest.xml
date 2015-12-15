@@ -96,7 +96,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.virtualtrails.configureRoute.CConfigureRouteCtrl" />
         </activity>
-        <activity android:name=".manageFriends.CAddFriendsCtrl"></activity>
+        <activity android:name=".manageFriends.CAddFriendsCtrl" />
+        <activity
+            android:name=".configureRoute.CViewRouteCtrl"
+            android:label="@string/title_activity_cview_route_ctrl"
+            android:parentActivityName=".configureRoute.CConfigureRouteCtrl"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.virtualtrails.configureRoute.CConfigureRouteCtrl" />
+        </activity>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package fr.virtualtrails.configureRoute;
 
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -32,10 +33,18 @@ public class CConfigureRouteM {
     //////// attibuts ////////
 
     public ArrayList<String> routeList = null;
+    ListView lst;
+    CConfigureRouteCtrl cConfigureRouteCtrl;
 
     private CConfigureRouteM() {}
 
-    public void ReadRouteNames() {
+    public void initConfigureRouteM(ListView list, CConfigureRouteCtrl pConfigureRouteCtrl){
+
+        lst = list;
+        cConfigureRouteCtrl = pConfigureRouteCtrl;
+    }
+
+    public void readRouteNames() {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("coordonees");
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -50,8 +59,14 @@ public class CConfigureRouteM {
                         if (po.getString("nomItineraire").compareTo(lastName) != 0) {
                             routeList.add(po.getString("nomItineraire"));
                             lastName = po.getString("nomItineraire");
+                            Log.d("ya pas bon banania :", "salut");
                         }
                     }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(cConfigureRouteCtrl, android.R.layout.simple_list_item_1,
+                            CConfigureRouteM.getInstance().getRouteNames());
+
+                    lst.setAdapter(adapter);
                 }
             }
         });
