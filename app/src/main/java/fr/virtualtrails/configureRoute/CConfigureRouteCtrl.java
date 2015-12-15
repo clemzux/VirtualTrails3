@@ -29,7 +29,7 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addItineraire;
+    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addItineraire, viewRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         managefriends = new Intent(this, CManageFriendsCtrl.class);
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
         addItineraire = new Intent(this, CAddRouteCtrl.class);
+        viewRoute = new Intent(this, CViewRouteCtrl.class);
     }
 
     public void initWidgets(){
@@ -82,13 +83,15 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         // remplissage listview
 
         mListView = (ListView) findViewById(R.id.listView);
+        CConfigureRouteM.getInstance().initConfigureRouteM(mListView, this);
+        CConfigureRouteM.getInstance().readRouteNames();
 
-        while (CConfigureRouteM.getInstance().routeList == null);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CConfigureRouteCtrl.this, android.R.layout.simple_list_item_1,
-                CConfigureRouteM.getInstance().getRouteNames());
-
-        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                launchViewRoute((String)parent.getItemAtPosition(position));
+            }
+        });
 
         //a completer
         //CConfigureDisplay.getIns....
@@ -129,8 +132,10 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         startActivity(addItineraire);
     }
 
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        // Do something when a list item is clicked
-        // see http://developer.android.com/guide/topics/ui/layout/listview.html
+    public void launchViewRoute(String pRouteName){
+        System.out.println(pRouteName);
+        CViewRouteM.getInstance().preInitViewRoute(pRouteName);
+
+        startActivity(viewRoute);
     }
 }

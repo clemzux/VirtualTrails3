@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.parse.Parse;
 import com.parse.ParseObject;
 
 import java.io.BufferedOutputStream;
@@ -129,7 +130,9 @@ public class CAddRouteM {
 
         // save en ligne sur parse
 
-        ParseObject wp;
+        /*ParseObject wp;
+
+        long now;
 
         for (MarkerOptions m : itinéraire) {
 
@@ -138,22 +141,44 @@ public class CAddRouteM {
             wp.put("latitude", m.getPosition().latitude);
             wp.put("longitude", m.getPosition().longitude);
             wp.saveInBackground();
+
+            now = System.currentTimeMillis();
+
+            while (System.currentTimeMillis() != now + 2000);
+        }*/
+
+        Thread save = new Thread(new SaveRouteThread(pRouteName));
+        save.run();
+    }
+
+    public class SaveRouteThread implements Runnable{
+
+        String nameRoute;
+        ArrayList<MarkerOptions> mo;
+
+        public SaveRouteThread(String pRouteName){
+            nameRoute = pRouteName;
+            mo = itinéraire;
         }
 
-        //////// save en local
+        @Override
+        public void run() {
+            ParseObject wp;
 
-        /*CRoute iti = new CRoute(String.valueOf(routeName.getText()), itinéraire);
+            long now;
 
-        ObjectOutputStream oos;
+            for (MarkerOptions m : mo) {
 
-        try {
-            oos = new ObjectOutputStream(
-                    new BufferedOutputStream(
-                            new FileOutputStream(
-                                    new File("clemzux.txt"))));
-            oos.writeObject(iti);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+                wp = new ParseObject("coordonees");
+                wp.put("nomItineraire", nameRoute);
+                wp.put("latitude", m.getPosition().latitude);
+                wp.put("longitude", m.getPosition().longitude);
+                wp.saveInBackground();
+
+                now = System.currentTimeMillis();
+
+                while (System.currentTimeMillis() != now + 3000);
+            }
+        }
     }
 }
