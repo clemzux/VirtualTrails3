@@ -1,4 +1,4 @@
-package fr.virtualtrails.manageFriends;
+package fr.virtualtrails.manageFriends.manageFriend;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,22 +11,15 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
-import fr.virtualtrails.configureRoute.CConfigureRouteCtrl;
-import fr.virtualtrails.configureRoute.CConfigureRouteM;
+import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
-import fr.virtualtrails.testBdd.CQuery;
+import fr.virtualtrails.manageFriends.addFriend.CAddFriendsCtrl;
+import fr.virtualtrails.manageFriends.informationFriend.CInformationFriendCtrl;
+import fr.virtualtrails.manageFriends.informationFriend.CInformationFriendM;
 
 public class CManageFriendsCtrl extends AppCompatActivity {
 
@@ -36,7 +29,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
 
 
     ListView mListView;
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends;
+    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends, infoFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +45,13 @@ public class CManageFriendsCtrl extends AppCompatActivity {
                     CManageFriendsM.getInstance().getFriends());
 
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                launchInfoFriend((String) parent.getItemAtPosition(position));
+            }
+        });
         managefriends = getIntent();
         initWidgets();
         initActivity();
@@ -67,6 +66,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         managefriends = new Intent(this, CManageFriendsCtrl.class);
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
         addFriends = new Intent(this, CAddFriendsCtrl.class);
+        infoFriend = new Intent(this, CInformationFriendCtrl.class);
     }
 
     public void initWidgets(){
@@ -134,16 +134,10 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         startActivity(addFriends);
     }
 
-// Controleur de la ListeView
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        // Do something when a list item is clicked
-        // see http://developer.android.com/guide/topics/ui/layout/listview.html
-    }
+    public void launchInfoFriend(String pPseudo){
+        CInformationFriendM.getInstance().preInitViewFriend(pPseudo);
 
-    public void Query(String key) {
-        // query try hard
-
-
+        startActivity(infoFriend);
     }
 
 }

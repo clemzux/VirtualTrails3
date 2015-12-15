@@ -14,17 +14,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.Parse;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
-import fr.virtualtrails.configureRoute.CConfigureRouteCtrl;
-import fr.virtualtrails.configureRoute.CConfigureRouteM;
+import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
-import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
-import fr.virtualtrails.manageFriends.CManageFriendsM;
+import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
+import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsM;
 
 public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback {
 

@@ -2,10 +2,7 @@ package fr.virtualtrails.consultStatistics;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,10 +11,10 @@ import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
-import fr.virtualtrails.configureRoute.CConfigureRouteCtrl;
+import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
-import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
+import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
 public class CConsultStatisticsCtrl extends AppCompatActivity {
 

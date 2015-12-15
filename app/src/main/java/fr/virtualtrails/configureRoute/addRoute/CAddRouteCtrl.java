@@ -1,4 +1,4 @@
-package fr.virtualtrails.configureRoute;
+package fr.virtualtrails.configureRoute.addRoute;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -19,10 +19,11 @@ import com.google.android.gms.maps.model.Marker;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
-import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
+import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
 public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallback {
 

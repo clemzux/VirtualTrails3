@@ -1,4 +1,4 @@
-package metier;
+package fr.virtualtrails.metier;
 
 import com.google.android.gms.maps.model.MarkerOptions;
 

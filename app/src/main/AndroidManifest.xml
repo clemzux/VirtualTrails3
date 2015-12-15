@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".configureRoute.CConfigureRouteCtrl"
+            android:name=".configureRoute.configureRoute.CConfigureRouteCtrl"
             android:label="@string/title_activity_cconfigure_route_ctrl">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -72,7 +72,7 @@
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
         </activity>
         <activity
-            android:name=".manageFriends.CManageFriendsCtrl"
+            android:name=".manageFriends.manageFriend.CManageFriendsCtrl"
             android:label="@string/title_activity_cmanage_friends_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
             android:theme="@style/AppTheme.NoActionBar">
@@ -90,22 +90,23 @@
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
         </activity>
         <activity
-            android:name=".configureRoute.CAddRouteCtrl"
+            android:name=".configureRoute.addRoute.CAddRouteCtrl"
             android:label="@string/title_activity_cadd_itineraire_ctrl">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.virtualtrails.configureRoute.CConfigureRouteCtrl" />
+                android:value=".configureRoute.configureRoute.CConfigureRouteCtrl" />
         </activity>
-        <activity android:name=".manageFriends.CAddFriendsCtrl" />
+        <activity android:name=".manageFriends.addFriend.CAddFriendsCtrl" />
         <activity
-            android:name=".configureRoute.CViewRouteCtrl"
+            android:name=".configureRoute.viewRoute.CViewRouteCtrl"
             android:label="@string/title_activity_cview_route_ctrl"
-            android:parentActivityName=".configureRoute.CConfigureRouteCtrl"
+            android:parentActivityName=".configureRoute.configureRoute.CConfigureRouteCtrl"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.virtualtrails.configureRoute.CConfigureRouteCtrl" />
+                android:value=".configureRoute.configureRoute.CConfigureRouteCtrl" />
         </activity>
+        <activity android:name=".manageFriends.informationFriend.CInformationFriendCtrl"></activity>
     </application>
 
 </manifest>

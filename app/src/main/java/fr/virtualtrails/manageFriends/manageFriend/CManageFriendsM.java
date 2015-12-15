@@ -1,4 +1,4 @@
-package fr.virtualtrails.manageFriends;
+package fr.virtualtrails.manageFriends.manageFriend;
 
 import android.util.Log;
 
@@ -40,14 +40,10 @@ public class CManageFriendsM {
                         p = objects.get(i);
                         frendsList.add(p.getString("pseudo"));
 
-                        //Log.i("testbdd", "linked " + i + " " + CFriendList.array.get(i));
-
                     }
                 } else {
                     Log.i("testbdd", "pb?");
                 }
-                Log.i("testbdd", "set appelé");
-                //cFriendList.setListFriends(linkedList);
             }
         });
     }

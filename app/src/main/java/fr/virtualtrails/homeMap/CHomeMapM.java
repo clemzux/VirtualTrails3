@@ -1,14 +1,9 @@
 package fr.virtualtrails.homeMap;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
-
-import fr.virtualtrails.configureRoute.CConfigureRouteCtrl;
 
 /**
  * Created by clemzux on 10/12/15.

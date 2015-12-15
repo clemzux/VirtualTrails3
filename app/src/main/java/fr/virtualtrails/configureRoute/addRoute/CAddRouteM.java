@@ -1,9 +1,8 @@
-package fr.virtualtrails.configureRoute;
+package fr.virtualtrails.configureRoute.addRoute;
 
 import android.graphics.Color;
 import android.widget.EditText;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -11,18 +10,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.parse.Parse;
 import com.parse.ParseObject;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.sql.Time;
 import java.util.ArrayList;
-
-import metier.CRoute;
 
 /**
  * Created by clemzux on 13/12/15.

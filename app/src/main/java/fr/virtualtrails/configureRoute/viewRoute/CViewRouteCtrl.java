@@ -1,30 +1,29 @@
-package fr.virtualtrails.configureRoute;
+package fr.virtualtrails.configureRoute.viewRoute;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureRoute.addRoute.CAddRouteCtrl;
+import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
-import fr.virtualtrails.manageFriends.CManageFriendsCtrl;
+import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
-public class CConfigureRouteCtrl extends AppCompatActivity {
+public class CViewRouteCtrl extends FragmentActivity implements OnMapReadyCallback {
 
-    ListView mListView;
-    //String[] routeName = new String[]{
-    //        "itinéraire 1", "itinéraire 2", "itinéraire 3"};
     private GoogleMap mMap;
     private Spinner menu;
     private TextView informativePart;
@@ -33,13 +32,15 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.configure_route_gui);
+        setContentView(R.layout.view_route_gui);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
-        ////////////////////////////
+        ///////////////////////////////
 
-        configureRoute = getIntent();
+        viewRoute = getIntent();
 
         initActivity();
         initWidgets();
@@ -59,11 +60,12 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
 
     public void initWidgets(){
 
-        informativePart = (TextView) findViewById(R.id.conf_route_informative_part);
+        informativePart = (TextView) findViewById(R.id.view_route_name);
+        informativePart.setText(CViewRouteM.getInstance().routeName);
 
         // remplissage menu
 
-        menu = (Spinner) findViewById(R.id.conf_route_menu);
+        menu = (Spinner) findViewById(R.id.view_route_menu);
         ArrayAdapter<CharSequence> adapterMenu = ArrayAdapter.createFromResource(this,
                 R.array.conf_route_menu_list, android.R.layout.simple_spinner_item);
         adapterMenu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -78,19 +80,6 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        // remplissage listview
-
-        mListView = (ListView) findViewById(R.id.listView);
-        CConfigureRouteM.getInstance().initConfigureRouteM(mListView, this);
-        CConfigureRouteM.getInstance().readRouteNames();
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchViewRoute((String)parent.getItemAtPosition(position));
-            }
         });
 
         //a completer
@@ -127,15 +116,11 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         }
     }
 
-    public void addRoute(View v){
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
 
-        startActivity(addItineraire);
-    }
-
-    public void launchViewRoute(String pRouteName){
-        System.out.println(pRouteName);
-        CViewRouteM.getInstance().preInitViewRoute(pRouteName);
-
-        startActivity(viewRoute);
+        mMap = googleMap;
+        CViewRouteM.getInstance().initViewRoute(mMap);
+        CViewRouteM.getInstance().readRoute();
     }
 }
