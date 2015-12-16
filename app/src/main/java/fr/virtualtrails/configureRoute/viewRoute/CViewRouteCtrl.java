@@ -120,6 +120,9 @@ public class CViewRouteCtrl extends FragmentActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(false);
         CViewRouteM.getInstance().initViewRoute(mMap);
         CViewRouteM.getInstance().readRoute();
     }

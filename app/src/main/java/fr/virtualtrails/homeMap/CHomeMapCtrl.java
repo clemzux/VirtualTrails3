@@ -111,11 +111,10 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setTrafficEnabled(true);
         mMap.setMyLocationEnabled(true);
-        //mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(48.856614, 2.3522219000000177)));
 

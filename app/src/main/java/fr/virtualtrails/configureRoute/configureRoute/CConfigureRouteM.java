@@ -49,7 +49,6 @@ public class CConfigureRouteM {
                         if (po.getString("nomItineraire").compareTo(lastName) != 0) {
                             routeList.add(po.getString("nomItineraire"));
                             lastName = po.getString("nomItineraire");
-                            Log.d("ya pas bon banania :", "salut");
                         }
                     }
 

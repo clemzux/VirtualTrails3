@@ -72,7 +72,7 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         // move camera to Paris
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(48.856614, 2.3522219000000177)));
@@ -148,15 +148,15 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
                 break;
 
             case 2 :
-                startActivity(managefriends);
+                startActivity(configureDisplay);
                 break;
 
             case 3 :
-
+                startActivity(managefriends);
                 break;
 
             case 4 :
-                startActivity(configureRoute);
+                startActivity(consultStatistics);
                 break;
 
             case 5 :
