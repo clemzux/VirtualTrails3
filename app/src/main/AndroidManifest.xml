@@ -106,7 +106,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".configureRoute.configureRoute.CConfigureRouteCtrl" />
         </activity>
-        <activity android:name=".manageFriends.informationFriend.CInformationFriendCtrl"></activity>
+        <activity android:name=".manageFriends.informationFriend.CInformationFriendCtrl" />
+        <activity
+            android:name=".consultStatistics.statisticView.CStatisticViewCtrl"
+            android:label="@string/title_activity_cstatistic_view_ctrl">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl" />
+        </activity>
     </application>
 
 </manifest>

@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
+import fr.virtualtrails.consultStatistics.statisticView.CStatisticViewCtrl;
+import fr.virtualtrails.consultStatistics.statisticView.CStatisticViewM;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
@@ -20,8 +23,9 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
 
     private Spinner menu;
     private TextView informativePart;
+    private ListView statList;
 
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends;
+    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, statView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
         consultStatistics = new Intent(this, CConsultStatisticsCtrl.class);
         managefriends = new Intent(this, CManageFriendsCtrl.class);
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
+        statView = new Intent(this, CStatisticViewCtrl.class);
     }
 
     public void initWidgets(){
@@ -65,8 +70,18 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
             }
         });
 
-        //a completer
-        //CConfigureDisplay.getIns....
+        // initialisation de la liste de stats
+
+        statList = (ListView) findViewById(R.id.consult_stat_listview);
+        CConsultStatisticsM.getInstance().initConsultM(statList, this);
+        CConsultStatisticsM.getInstance().readStats();
+
+        statList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                launchViewStats(CConsultStatisticsM.getInstance().objectId.get(position));
+            }
+        });
     }
 
     public void launchActivity(int position){
@@ -97,5 +112,10 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
                 // realité augmentée
                 break;
         }
+    }
+
+    public void launchViewStats(String pObjectId){
+        CStatisticViewM.getInstance().initStatViewM(pObjectId);
+        startActivity(statView);
     }
 }

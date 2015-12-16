@@ -38,6 +38,7 @@ public class CConfigureRouteM {
     public void readRouteNames() {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("coordonees");
+        query.orderByAscending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, com.parse.ParseException e) {

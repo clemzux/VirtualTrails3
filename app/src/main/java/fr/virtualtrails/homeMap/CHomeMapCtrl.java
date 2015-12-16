@@ -163,15 +163,15 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
         CharSequence text = "Vous avez terminé la randonnée, " +
                 "vous pourrez retrouver les statistiques dans la section \"Consulter statistiques\" !";
 
+        //CharSequence text = "Vitesse moyenne = " + CHomeMapM.getInstance().averageSpeed;
+
         int time = Toast.LENGTH_SHORT;
 
         Toast info = Toast.makeText(this, text, time);
-        info.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+        info.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
         info.show();
 
-        long now = System.currentTimeMillis();
-
         CHomeMapM.getInstance().setHomeMode();
-        //startActivity(homeMap);
+        CHomeMapM.getInstance().saveStatistics();
     }
 }

@@ -9,4 +9,5 @@
     <string name="title_activity_claunch_route_ctrl">CLaunchRouteCtrl</string>
     <string name="title_activity_cadd_itineraire_ctrl">Map</string>
     <string name="title_activity_cview_route_ctrl">CViewRouteCtrl</string>
+    <string name="title_activity_cstatistic_view_ctrl">Map</string>
 </resources>

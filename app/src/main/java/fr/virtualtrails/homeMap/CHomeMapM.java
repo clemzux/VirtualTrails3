@@ -20,7 +20,9 @@ import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,6 +47,16 @@ public class CHomeMapM {
     public Polyline pl;
     private CHomeMapCtrl cHomeMapCtrl;
     private boolean trailWorking = true;
+    private long startTrail;
+    private long endtrail;
+    public String Hdebut;
+    public String Hfin;
+    private long timeTravel;
+    float[] speed;
+    public float averageSpeed;
+    public double altitude = 0;
+
+    public int totalDistance = 0; // en m
 
 
     private CHomeMapM() {}
@@ -79,7 +91,7 @@ public class CHomeMapM {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("coordonees");
         query.whereContains("nomItineraire", routeName);
-        query.addAscendingOrder("createdAt");
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
@@ -96,15 +108,26 @@ public class CHomeMapM {
         });
     }
 
+    public String getTime(long time){
+
+        int h,m;
+
+        h = (int) (((time / 1000) / 60) / 60);
+        h = h % 24;
+        h++; // d'hivers lol
+
+        m = (int) ((time / 1000) / 60) % 60;
+
+        return h + "h " + m + "min";
+    }
+
     public void nowLetsRockForReal(){
 
-        CharSequence text = "Nouvelle randonnée lancée, vous pouvez inviter des amis en cliquant sur le bouton \"inviter\" !";
+        startTrail = System.currentTimeMillis();
+        Hdebut = getTime(startTrail);
+        speed = new float[route.size()];
 
-        int time = Toast.LENGTH_SHORT;
-
-        Toast info = Toast.makeText(cHomeMapCtrl, text, time);
-        info.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
-        info.show();
+        setTotalDistance();
 
         getMarkerOption();
 
@@ -114,6 +137,9 @@ public class CHomeMapM {
 
                 if (trailWorking) {
 
+                    if (altitude < location.getAltitude())
+                        altitude = location.getAltitude();
+
                     Location locationB = new Location("next");
                     locationB.setLatitude(route.get(nbWaypoint).latitude);
                     locationB.setLongitude(route.get(nbWaypoint).longitude);
@@ -121,6 +147,7 @@ public class CHomeMapM {
                     if (location.distanceTo(locationB) < 15) {
 
                         markRoute.get(nbWaypoint).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        speed[nbWaypoint] = location.getSpeed();
                         nbWaypoint++;
                         drawMarkers();
                     }
@@ -129,6 +156,14 @@ public class CHomeMapM {
                     drawMarkers();
 
                     if (nbWaypoint == route.size()) {
+                        endtrail = System.currentTimeMillis();
+                        Hfin = getTime(endtrail);
+
+                        for (int i = 0; i < route.size(); i++)
+                            averageSpeed += speed[i];
+
+                        averageSpeed /= route.size();
+
                         cHomeMapCtrl.stopItNow();
                     }
                 }
@@ -178,6 +213,53 @@ public class CHomeMapM {
 
             plo.add(markRoute.get(i).getPosition());
             pl.setPoints(plo.getPoints());
+        }
+    }
+
+    public void setTotalDistance(){
+
+        Location locA = new Location("actual");
+        locA.setLatitude((route.get(0)).latitude);
+        locA.setLongitude((route.get(0)).longitude);
+        Location locB = new Location("next");
+
+        for (int i = 1; i < route.size(); i++){
+            locB.setLatitude((route.get(i)).latitude);
+            locB.setLongitude((route.get(i)).longitude);
+
+            totalDistance += locA.distanceTo(locB);
+
+            locA.setLatitude(locB.getLatitude());
+            locA.setLongitude(locB.getLongitude());
+        }
+    }
+
+    public void saveStatistics(){
+
+        Thread save = new Thread(new SaveStatisticsThread(routeName));
+        save.run();
+    }
+
+    public class SaveStatisticsThread implements Runnable{
+
+        String nameRoute;
+
+        public SaveStatisticsThread(String pRouteName){
+            nameRoute = pRouteName;
+        }
+
+        @Override
+        public void run() {
+
+            ParseObject wp;
+
+            wp = new ParseObject("statistic");
+            wp.put("distTot", totalDistance);
+            wp.put("Hdepart", Hdebut);
+            wp.put("Harrivee", Hfin);
+            wp.put("Vmoy", averageSpeed);
+            wp.put("altMax", altitude);
+            wp.saveInBackground();
         }
     }
 }
