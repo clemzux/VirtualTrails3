@@ -3,9 +3,11 @@ package fr.virtualtrails.homeMap;
 import android.graphics.Color;
 import android.location.Location;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,6 +44,7 @@ public class CHomeMapM {
     public PolylineOptions plo = new PolylineOptions();
     public Polyline pl;
     private CHomeMapCtrl cHomeMapCtrl;
+    private boolean trailWorking = true;
 
 
     private CHomeMapM() {}
@@ -53,6 +56,7 @@ public class CHomeMapM {
 
     public void setHomeMode(){
         routeMode = false;
+        trailWorking = false;
     }
 
     public void setMap(GoogleMap pMap, CHomeMapCtrl pcHomeMapCtrl){
@@ -94,28 +98,39 @@ public class CHomeMapM {
 
     public void nowLetsRockForReal(){
 
+        CharSequence text = "Nouvelle randonnée lancée, vous pouvez inviter des amis en cliquant sur le bouton \"inviter\" !";
+
+        int time = Toast.LENGTH_SHORT;
+
+        Toast info = Toast.makeText(cHomeMapCtrl, text, time);
+        info.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+        info.show();
+
         getMarkerOption();
 
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
 
-                Location locationB = new Location("next");
-                locationB.setLatitude(route.get(nbWaypoint).latitude);
-                locationB.setLongitude(route.get(nbWaypoint).longitude);
+                if (trailWorking) {
 
-                if (location.distanceTo(locationB) < 15) {
+                    Location locationB = new Location("next");
+                    locationB.setLatitude(route.get(nbWaypoint).latitude);
+                    locationB.setLongitude(route.get(nbWaypoint).longitude);
 
-                    markRoute.get(nbWaypoint).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                    nbWaypoint++;
+                    if (location.distanceTo(locationB) < 15) {
+
+                        markRoute.get(nbWaypoint).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        nbWaypoint++;
+                        drawMarkers();
+                    }
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
                     drawMarkers();
-                }
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-                drawMarkers();
-
-                if (nbWaypoint == route.size()){
-                    cHomeMapCtrl.stopItNow();
+                    if (nbWaypoint == route.size()) {
+                        cHomeMapCtrl.stopItNow();
+                    }
                 }
 
             }

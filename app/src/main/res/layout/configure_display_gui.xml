@@ -24,6 +24,7 @@
 
     </LinearLayout>
     <EditText
+        android:id="@+id/disp_pseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entrez votre pseudo "
@@ -35,23 +36,27 @@
         android:text="Configuration de l'affichage de la map"/>
 
     <CheckBox
+        android:id="@+id/disp_speed"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="vitesse"
         />
 
     <CheckBox
+        android:id="@+id/disp_total_distance"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="distance parcourue"
         />
 
     <CheckBox
+        android:id="@+id/disp_altitude"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="altitude" />
 
     <CheckBox
+        android:id="@+id/disp_ditance_remaining"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="distance restante" />

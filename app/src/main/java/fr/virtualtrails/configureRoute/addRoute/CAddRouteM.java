@@ -1,7 +1,10 @@
 package fr.virtualtrails.configureRoute.addRoute;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;

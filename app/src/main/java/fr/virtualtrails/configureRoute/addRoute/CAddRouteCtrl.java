@@ -3,12 +3,14 @@ package fr.virtualtrails.configureRoute.addRoute;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -73,7 +75,6 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // move camera to Paris
-        LatLng sydney = new LatLng(-34, 151);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(48.856614, 2.3522219000000177)));
 
         // listener click sur la map
@@ -136,9 +137,6 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-
-        //a completer
-        //CConfigureDisplay.getIns....
     }
 
     public void launchActivity(int position){
@@ -174,6 +172,15 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
     // on sauvegarde l'itineraire dans la base de données
 
     public void saveRoute(View v){
+
+        CharSequence text = "Veuillez patienter pendant l'enregistrement dans la base de données, " +
+                "vous reviendrez automatiquement a la page précédente !";
+
+        int time = Toast.LENGTH_SHORT;
+
+        Toast info = Toast.makeText(this, text, time);
+        info.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
+        info.show();
 
         CAddRouteM.getInstance().saveRoute(String.valueOf(routeName.getText()));
         startActivity(configureRoute);

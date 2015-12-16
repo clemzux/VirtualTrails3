@@ -3,11 +3,13 @@ package fr.virtualtrails.homeMap;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -158,7 +160,19 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void stopItNow(){
+
+        CharSequence text = "Vous avez terminé la randonnée, " +
+                "vous pourrez retrouver les statistiques dans la section \"Consulter statistiques\" !";
+
+        int time = Toast.LENGTH_SHORT;
+
+        Toast info = Toast.makeText(this, text, time);
+        info.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+        info.show();
+
+        long now = System.currentTimeMillis();
+
         CHomeMapM.getInstance().setHomeMode();
-        startActivity(homeMap);
+        //startActivity(homeMap);
     }
 }

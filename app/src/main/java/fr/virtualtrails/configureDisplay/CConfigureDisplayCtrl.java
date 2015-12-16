@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,6 +24,9 @@ public class CConfigureDisplayCtrl extends AppCompatActivity {
 
     private Spinner menu;
     private TextView informativePart;
+    private Button validate;
+    private EditText pseudo;
+    private CheckBox speed, distanceRemaining, altitude, totalDistance;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends;
 
@@ -33,18 +38,9 @@ public class CConfigureDisplayCtrl extends AppCompatActivity {
         ///////////////////////////////////////
 
         configureDisplay = getIntent();
+
         initWidgets();
         initActivity();
-
-        // pop-up
-        Button fab = (Button) findViewById(R.id.bouton_valider);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Affichage configuré !", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     public void initActivity(){
@@ -79,8 +75,23 @@ public class CConfigureDisplayCtrl extends AppCompatActivity {
             }
         });
 
-        //a completer
-        //CConfigureDisplay.getIns....
+        pseudo = (EditText) findViewById(R.id.disp_pseudo);
+        speed = (CheckBox) findViewById(R.id.disp_speed);
+        distanceRemaining = (CheckBox) findViewById(R.id.disp_ditance_remaining);
+        totalDistance = (CheckBox) findViewById(R.id.disp_total_distance);
+        altitude = (CheckBox) findViewById(R.id.disp_altitude);
+
+        validate = (Button) findViewById(R.id.bouton_valider);
+        validate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Affichage configuré !", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                CConfigureDisplayM.getInstance().setDisplayModel(String.valueOf(pseudo.getText()), speed.isChecked(),
+                        totalDistance.isChecked(), altitude.isChecked(), distanceRemaining.isChecked());
+            }
+        });
     }
 
     public void launchActivity(int position){
