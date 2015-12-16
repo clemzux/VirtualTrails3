@@ -153,6 +153,7 @@ public class CAddRouteM {
 
             plo = new PolylineOptions();
             itinéraire = new ArrayList<MarkerOptions>();
+            nbWaypoint = 0;
         }
     }
 }

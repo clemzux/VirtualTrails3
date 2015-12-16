@@ -86,7 +86,8 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         CHomeMapM.getInstance().initHomeMapM(mMap, menu, informativePart);
@@ -115,6 +116,9 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(48.856614, 2.3522219000000177)));
+
+        if (CHomeMapM.getInstance().routeMode)
+            letsRockBaby();
     }
 
     public void launchActivity(int position){
@@ -145,5 +149,16 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
                 // realité augmentée
                 break;
         }
+    }
+
+    public void letsRockBaby(){
+
+        CHomeMapM.getInstance().setMap(mMap, this);
+        CHomeMapM.getInstance().readRoute();
+    }
+
+    public void stopItNow(){
+        CHomeMapM.getInstance().setHomeMode();
+        startActivity(homeMap);
     }
 }
