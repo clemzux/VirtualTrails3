@@ -1,6 +1,8 @@
 package fr.virtualtrails.manageFriends.manageFriend;
 
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseObject;
@@ -25,7 +27,7 @@ public class CManageFriendsM {
     private CManageFriendsM() {
     }
 
-    public void ReadFriends() {
+    public void ReadFriends(final ListView pListView, final CManageFriendsCtrl cManageFriendsCtrl) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("friends");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
@@ -44,17 +46,18 @@ public class CManageFriendsM {
                 } else {
                     Log.i("testbdd", "pb?");
                 }
+
+                String[] friends = new String[frendsList.size()];
+                int i =0;
+                for (String s : frendsList)
+                    friends[i++] = s;
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(cManageFriendsCtrl, android.R.layout.simple_list_item_1,
+                        friends);
+
+                pListView.setAdapter(adapter);
             }
         });
     }
 
-    public String[] getFriends(){
-
-        String[] friends = new String[frendsList.size()];
-        int i =0;
-        for (String s : frendsList)
-            friends[i++] = s;
-
-        return friends;
-    }
 }

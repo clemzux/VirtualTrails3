@@ -35,7 +35,6 @@ public class CAddFriendsCtrl extends AppCompatActivity {
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends, infoFriend;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -29,7 +29,7 @@ public class CInformationFriendCtrl extends AppCompatActivity {
 
     ListView mListView;
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends, infoFriend;
-    TextView pseudoText;
+    TextView pseudoText, mailText, numText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,15 @@ public class CInformationFriendCtrl extends AppCompatActivity {
         setContentView(R.layout.activity_information_friend_gui);
 
         pseudoText = (TextView) findViewById(R.id.pseudoText);
-        pseudoText.setText(CInformationFriendM.getInstance().pseudo);
+        mailText = (TextView) findViewById(R.id.mailText);
+        numText = (TextView) findViewById(R.id.telText);
+
+        numText.setText("4");
         infoFriend = getIntent();
+
+        CInformationFriendM.getInstance().initInfos(mailText, numText);
+        pseudoText.setText(CInformationFriendM.getInstance().pseudo);
+        CInformationFriendM.getInstance().ReadFriends();
         initWidgets();
         initActivity();
     }
@@ -76,6 +83,7 @@ public class CInformationFriendCtrl extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
 
         //a completer
         //CConfigureDisplay.getIns....

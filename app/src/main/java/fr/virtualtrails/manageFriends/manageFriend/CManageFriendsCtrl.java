@@ -26,8 +26,6 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
-
-
     ListView mListView;
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends, infoFriend;
 
@@ -37,21 +35,15 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         setContentView(R.layout.manage_friends_gui);
         mListView = (ListView) findViewById(R.id.listView);
 
-        //sql request read BDD
+        CManageFriendsM.getInstance().ReadFriends(mListView, this);
 
-        while (CManageFriendsM.getInstance().frendsList == null);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CManageFriendsCtrl.this, android.R.layout.simple_list_item_1,
-                    CManageFriendsM.getInstance().getFriends());
-
-        mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 launchInfoFriend((String) parent.getItemAtPosition(position));
             }
         });
+
         managefriends = getIntent();
         initWidgets();
         initActivity();
@@ -126,17 +118,14 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     }
 
     public void testbdd(View v){
-
     }
 
     public void addFriends(View v){
-
         startActivity(addFriends);
     }
 
     public void launchInfoFriend(String pPseudo){
         CInformationFriendM.getInstance().preInitViewFriend(pPseudo);
-
         startActivity(infoFriend);
     }
 

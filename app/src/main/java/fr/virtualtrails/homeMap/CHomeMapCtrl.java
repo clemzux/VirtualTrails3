@@ -54,8 +54,6 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
             CHomeMapM.getInstance().setBDDinitialized();
         }
 
-        launchHidenProcesses();
-
         initWidgets();
         initActivity();
     }
@@ -147,10 +145,5 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
                 // realité augmentée
                 break;
         }
-    }
-
-    private void launchHidenProcesses() {
-
-        CManageFriendsM.getInstance().ReadFriends();
     }
 }
