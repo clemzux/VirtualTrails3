@@ -16,7 +16,7 @@ import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.statisticView.CStatisticViewCtrl;
 import fr.virtualtrails.statistics.statisticView.CStatisticViewM;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
-import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
+import fr.virtualtrails.configureRoute.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
 public class CConsultStatisticsCtrl extends AppCompatActivity {

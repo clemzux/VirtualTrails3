@@ -14,7 +14,7 @@ import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
-import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
+import fr.virtualtrails.configureRoute.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.addFriend.CAddFriendsCtrl;
 import fr.virtualtrails.manageFriends.informationFriend.CInformationFriendCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;

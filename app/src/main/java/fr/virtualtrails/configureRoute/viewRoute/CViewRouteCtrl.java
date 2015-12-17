@@ -19,7 +19,7 @@ import fr.virtualtrails.configureRoute.addRoute.CAddRouteCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
-import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
+import fr.virtualtrails.configureRoute.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
 public class CViewRouteCtrl extends FragmentActivity implements OnMapReadyCallback {

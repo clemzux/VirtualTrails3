@@ -1,4 +1,4 @@
-package fr.virtualtrails.launchRoute;
+package fr.virtualtrails.configureRoute.launchRoute;
 
 import android.content.Intent;
 import android.os.Bundle;

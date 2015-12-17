@@ -1,6 +1,5 @@
-package fr.virtualtrails.launchRoute;
+package fr.virtualtrails.configureRoute.launchRoute;
 
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -10,8 +9,6 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteM;
 
 /**
  * Created by clemzux on 16/12/15.

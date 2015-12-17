@@ -82,7 +82,7 @@
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
         </activity>
         <activity
-            android:name=".launchRoute.CLaunchRouteCtrl"
+            android:name=".configureRoute.launchRoute.CLaunchRouteCtrl"
             android:label="@string/title_activity_claunch_route_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
             android:theme="@style/AppTheme.NoActionBar">

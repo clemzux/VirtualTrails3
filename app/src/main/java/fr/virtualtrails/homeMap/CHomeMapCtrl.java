@@ -1,11 +1,7 @@
 package fr.virtualtrails.homeMap;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -28,7 +24,7 @@ import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
-import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
+import fr.virtualtrails.configureRoute.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
 public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback {
