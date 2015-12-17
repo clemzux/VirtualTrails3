@@ -28,7 +28,7 @@ public class CInformationFriendM {
 
     public TextView mailText;
     public TextView numText;
-    public int numTel;
+    public double numTel;
     public String pseudo, mail;
 
     public void preInitViewFriend(String pPseudo){
@@ -38,9 +38,8 @@ public class CInformationFriendM {
 
     public void initInfos(TextView mailText, TextView numText) {
         this.mailText = mailText;
-        this.mailText = numText;
+        this.numText = numText;
     }
-
 
     public void ReadFriends() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("friends");
@@ -48,19 +47,15 @@ public class CInformationFriendM {
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
 
-
                 if (e == null) {
 
                     ParseObject p;
-
                     p = objects.get(0);
                     mail = p.getString("mail");
-                    numTel = p.getInt("num");
+                    numTel = p.getDouble("num");
                     Log.i("testbdd", "mail trouvé : " + mail + " numtel " + numTel);
-
                     mailText.setText(p.getString("mail"));
-                    numText.setText(p.get("num").toString());
-
+                    numText.setText(String.valueOf(numTel));
 
                 } else {
                     Log.i("testbdd", "pb?");
