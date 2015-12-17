@@ -2,6 +2,8 @@ package fr.virtualtrails.homeMap;
 
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -37,6 +39,9 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
     private TextView informativePart;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends;
+
+    private Uri fileUri;
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +164,11 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
                 break;
 
             case 6 :
-                // realité augmentée
+                /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
                 break;
         }
     }

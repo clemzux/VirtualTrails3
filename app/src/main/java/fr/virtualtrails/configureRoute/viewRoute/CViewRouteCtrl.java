@@ -15,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.addRoute.CAddRouteCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
@@ -26,7 +27,7 @@ public class CViewRouteCtrl extends FragmentActivity implements OnMapReadyCallba
 
     private GoogleMap mMap;
     private Spinner menu;
-    private TextView informativePart;
+    private TextView informativePart, routeName;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addItineraire, viewRoute;
 
@@ -60,8 +61,12 @@ public class CViewRouteCtrl extends FragmentActivity implements OnMapReadyCallba
 
     public void initWidgets(){
 
-        informativePart = (TextView) findViewById(R.id.view_route_name);
-        informativePart.setText(CViewRouteM.getInstance().routeName);
+        informativePart = (TextView) findViewById(R.id.view_route_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
+
+        routeName = (TextView) findViewById(R.id.view_route_name);
+        routeName.setText(CViewRouteM.getInstance().routeName);
 
         // remplissage menu
 
