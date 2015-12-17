@@ -33,7 +33,7 @@ public class CInformationFriendCtrl extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information_friend_gui);
+        setContentView(R.layout.information_friend_gui);
 
         pseudoText = (TextView) findViewById(R.id.pseudoText);
         mailText = (TextView) findViewById(R.id.mailText);

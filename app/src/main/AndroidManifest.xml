@@ -115,6 +115,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".statistics.consultStatistics.CConsultStatisticsCtrl" />
         </activity>
+        <activity android:name=".configureRoute.sharedRoute.CSharedRouteCtrl"></activity>
     </application>
 
 </manifest>

@@ -1,67 +1,48 @@
-package fr.virtualtrails.manageFriends.addFriend;
+package fr.virtualtrails.configureRoute.sharedRoute;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.parse.ParseObject;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
-import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
+import fr.virtualtrails.manageFriends.addFriend.CAddFriendsCtrl;
 import fr.virtualtrails.manageFriends.informationFriend.CInformationFriendCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
+import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 
-public class CAddFriendsCtrl extends AppCompatActivity {
+public class CSharedRouteCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends, infoFriend;
+    ListView mListView;
+    Intent homeMap, configureRoute, configureDisplay,
+            launchRoute, consultStatistics, managefriends,
+            addFriends, infoFriend, sharedFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_friends_gui);
+        setContentView(R.layout.shared_route_gui);
 
-        final EditText pseudo = (EditText) findViewById(R.id.edit_pseudo);
-        final EditText num = (EditText) findViewById(R.id.edit_num);
-        final EditText mail = (EditText) findViewById(R.id.edit_mail);
-        Button valider = (Button) findViewById(R.id.bouton_valider);
+        mListView = (ListView) findViewById(R.id.listView);
 
-        // listeners
-        valider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseObject friend = new ParseObject("friends");
-                friend.put("pseudo", pseudo.getText().toString());
-                friend.put("num", Integer.parseInt(num.getText().toString()));
-                friend.put("mail", mail.getText().toString());
-                friend.saveInBackground();
-                Snackbar.make(view, "Ami ajouté !", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                // Si on a envie d'envoyer un mail via un mini-client
-                // sendEmail("azedine.game@gmail.com", mail.getText().toString());
+        sharedFriend = getIntent();
 
-            }
-        });
-
-        initWidgets();
-        initActivity();
+        CSharedRouteM.getInstance().ReadFriends(mListView, this);
+        //initWidgets();
+        //initActivity();
+        
     }
-
 
     public void initActivity(){
 
@@ -73,6 +54,7 @@ public class CAddFriendsCtrl extends AppCompatActivity {
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
         addFriends = new Intent(this, CAddFriendsCtrl.class);
         infoFriend = new Intent(this, CInformationFriendCtrl.class);
+        sharedFriend = new Intent(this, CSharedRouteCtrl.class );
     }
 
     public void initWidgets(){
@@ -128,24 +110,6 @@ public class CAddFriendsCtrl extends AppCompatActivity {
             case 6 :
                 // realité augmentée
                 break;
-        }
-    }
-    public void sendEmail(String TO, String CC) {
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            finish();
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(CAddFriendsCtrl.this,
-                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
     }
 }
