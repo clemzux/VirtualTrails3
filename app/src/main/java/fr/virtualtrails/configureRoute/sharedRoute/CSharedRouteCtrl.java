@@ -15,6 +15,7 @@ import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.configureRoute.launchRoute.CLaunchRouteCtrl;
+import fr.virtualtrails.homeMap.CHomeMapM;
 import fr.virtualtrails.manageFriends.addFriend.CAddFriendsCtrl;
 import fr.virtualtrails.manageFriends.informationFriend.CInformationFriendCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
@@ -37,8 +38,14 @@ public class CSharedRouteCtrl extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listView);
 
         sharedFriend = getIntent();
-
-        CSharedRouteM.getInstance().ReadFriends(mListView, this);
+        CSharedRouteM.getInstance().initConfigureRouteM(mListView, this);
+        CSharedRouteM.getInstance().readRouteNames();
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                launchRouteAtHomeActivity((String) parent.getItemAtPosition(position));
+            }
+        });
         //initWidgets();
         //initActivity();
 
@@ -111,5 +118,9 @@ public class CSharedRouteCtrl extends AppCompatActivity {
                 // realité augmentée
                 break;
         }
+    }
+    public void launchRouteAtHomeActivity(String pRouteName){
+        CHomeMapM.getInstance().setRouteMode(pRouteName);
+        startActivity(homeMap);
     }
 }

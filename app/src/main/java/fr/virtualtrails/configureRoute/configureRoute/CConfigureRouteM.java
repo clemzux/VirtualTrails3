@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Created by clemzux on 13/12/15.
  */
+
 public class CConfigureRouteM {
     private static CConfigureRouteM ourInstance = new CConfigureRouteM();
 
