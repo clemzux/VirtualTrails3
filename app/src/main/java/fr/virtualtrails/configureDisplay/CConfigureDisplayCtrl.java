@@ -56,6 +56,8 @@ public class CConfigureDisplayCtrl extends AppCompatActivity {
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.disp_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
         menu = (Spinner) findViewById(R.id.disp_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

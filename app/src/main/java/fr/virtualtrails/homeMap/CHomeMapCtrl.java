@@ -1,6 +1,11 @@
 package fr.virtualtrails.homeMap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -20,6 +25,7 @@ import com.parse.Parse;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
@@ -73,6 +79,9 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
 
         informativePart = (TextView) findViewById(R.id.home_informative_part);
 
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
+
         menu = (Spinner) findViewById(R.id.home_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.home_menu_list, android.R.layout.simple_spinner_item);
@@ -119,6 +128,14 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
 
         if (CHomeMapM.getInstance().routeMode)
             letsRockBaby();
+
+        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                if (CConfigureDisplayM.getInstance().pseudoSetted)
+                    CHomeMapM.getInstance().putMyPositionInBDD(location, String.valueOf(informativePart.getText()));
+            }
+        });
     }
 
     public void launchActivity(int position){

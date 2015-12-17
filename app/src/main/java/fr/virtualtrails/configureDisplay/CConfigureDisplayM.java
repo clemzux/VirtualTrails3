@@ -16,6 +16,7 @@ public class CConfigureDisplayM {
     public boolean initialized = false;
 
     public String pseudo;
+    public boolean pseudoSetted = false;
     public boolean speed = false;
     public boolean totalDistance = false;
     public boolean altitude = false;
@@ -26,6 +27,7 @@ public class CConfigureDisplayM {
         initialized = true;
 
         pseudo = pPseudo;
+        pseudoSetted = true;
         speed = pSpeed;
         totalDistance = pTotalDistance;
         altitude = pAltitude;

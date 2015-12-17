@@ -1,7 +1,10 @@
 package fr.virtualtrails.homeMap;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
@@ -214,6 +217,37 @@ public class CHomeMapM {
             plo.add(markRoute.get(i).getPosition());
             pl.setPoints(plo.getPoints());
         }
+
+        drawFriendsPosition();
+    }
+
+    private void drawFriendsPosition(){
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("friendsCoords");
+        query.whereContains("pseudo", String.valueOf(informativePart.getText()));
+        query.orderByDescending("createdAt");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, com.parse.ParseException e) {
+
+                if (e == null) {
+
+                    String usedPseudo = objects.get(0).getString("pseudo");
+                    LatLng actualLatlng = new LatLng(objects.get(0).getDouble("laT"), objects.get(0).getDouble("lonG"));
+                    mMap.addMarker(new MarkerOptions().title(objects.get(0).getString("pseudo")).position(actualLatlng));
+
+                    for (ParseObject po : objects){
+                        if (usedPseudo.compareTo(String.valueOf(po.getString("pseudo"))) != 0) {
+                            actualLatlng = new LatLng(po.getDouble("lonG"), po.getDouble("laT"));
+                            mMap.addMarker(new MarkerOptions().title(po.getString("pseudo")).position(actualLatlng));
+                            usedPseudo = po.getString("pseudo");
+                        }
+                    }
+
+                    nowLetsRockForReal();
+                }
+            }
+        });
     }
 
     public void setTotalDistance(){
@@ -262,5 +296,15 @@ public class CHomeMapM {
             wp.saveInBackground();
         }
     }
-    
+
+    public void putMyPositionInBDD(Location pLoc, String pPseudo){
+
+        ParseObject wp;
+
+        wp = new ParseObject("friendsCoords");
+        wp.put("pseudo", pPseudo);
+        wp.put("laT", pLoc.getLatitude());
+        wp.put("lonG", pLoc.getLongitude());
+        wp.saveInBackground();
+    }
 }
