@@ -13,6 +13,7 @@ import android.widget.TextView;
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
+import fr.virtualtrails.configureRoute.sharedRoute.CSharedRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
@@ -26,7 +27,8 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     private TextView informativePart;
 
     ListView mListView;
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addFriends, infoFriend;
+    Intent homeMap, configureRoute, configureDisplay, launchRoute,
+            consultStatistics, managefriends, addFriends, infoFriend, sharedRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
         addFriends = new Intent(this, CAddFriendsCtrl.class);
         infoFriend = new Intent(this, CInformationFriendCtrl.class);
+        sharedRoute = new Intent(this, CSharedRouteCtrl.class);
     }
 
     public void initWidgets(){
@@ -127,5 +130,7 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         CInformationFriendM.getInstance().preInitViewFriend(pPseudo);
         startActivity(infoFriend);
     }
+
+
 
 }

@@ -41,7 +41,7 @@ public class CSharedRouteCtrl extends AppCompatActivity {
         CSharedRouteM.getInstance().ReadFriends(mListView, this);
         //initWidgets();
         //initActivity();
-        
+
     }
 
     public void initActivity(){

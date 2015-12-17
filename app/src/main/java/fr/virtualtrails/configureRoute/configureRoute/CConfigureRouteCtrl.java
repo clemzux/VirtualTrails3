@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureRoute.sharedRoute.CSharedRouteCtrl;
 import fr.virtualtrails.configureRoute.viewRoute.CViewRouteCtrl;
 import fr.virtualtrails.configureRoute.viewRoute.CViewRouteM;
 import fr.virtualtrails.configureRoute.addRoute.CAddRouteCtrl;
@@ -31,7 +32,8 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
     private Spinner menu;
     private TextView informativePart;
 
-    Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends, addItineraire, viewRoute;
+    Intent homeMap, configureRoute, configureDisplay,
+            launchRoute, consultStatistics, managefriends, addItineraire, viewRoute, sharedRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         launchRoute = new Intent(this, CLaunchRouteCtrl.class);
         addItineraire = new Intent(this, CAddRouteCtrl.class);
         viewRoute = new Intent(this, CViewRouteCtrl.class);
+        sharedRoute = new Intent(this, CSharedRouteCtrl.class);
     }
 
     public void initWidgets(){
@@ -139,5 +142,9 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
         CViewRouteM.getInstance().preInitViewRoute(pRouteName);
 
         startActivity(viewRoute);
+    }
+
+    public void OpenSharedRoutes(View v){
+        startActivity(sharedRoute);
     }
 }

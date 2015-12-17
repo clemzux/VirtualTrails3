@@ -28,6 +28,7 @@ public class CSharedRouteM {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(cSharedRouteCtrl, android.R.layout.simple_list_item_1,
                 friends);
+
         pListView.setAdapter(adapter);
 
     }

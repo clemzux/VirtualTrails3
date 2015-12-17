@@ -23,7 +23,12 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
+    <Button
+        android:id="@+id/conf_shared_add_route"
+        android:text="Go to shared Routes !"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:onClick="OpenSharedRoutes"/>
     <Button
         android:id="@+id/conf_route_add_route"
         android:text="+"
