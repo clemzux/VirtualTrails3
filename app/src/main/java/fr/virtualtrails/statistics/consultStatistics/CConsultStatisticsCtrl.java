@@ -1,4 +1,4 @@
-package fr.virtualtrails.consultStatistics;
+package fr.virtualtrails.statistics.consultStatistics;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
-import fr.virtualtrails.consultStatistics.statisticView.CStatisticViewCtrl;
-import fr.virtualtrails.consultStatistics.statisticView.CStatisticViewM;
+import fr.virtualtrails.statistics.statisticView.CStatisticViewCtrl;
+import fr.virtualtrails.statistics.statisticView.CStatisticViewM;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
@@ -66,8 +66,7 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         // initialisation de la liste de stats
@@ -79,7 +78,7 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
         statList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchViewStats(CConsultStatisticsM.getInstance().objectId.get(position));
+                launchViewStats(CConsultStatisticsM.getInstance().objectId.get(position), position);
             }
         });
     }
@@ -114,8 +113,9 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
         }
     }
 
-    public void launchViewStats(String pObjectId){
+    public void launchViewStats(String pObjectId, int pPosition){
         CStatisticViewM.getInstance().initStatViewM(pObjectId);
+        CStatisticViewM.getInstance().setRouteName(CConsultStatisticsM.getInstance().routeNames[pPosition]);
         startActivity(statView);
     }
 }

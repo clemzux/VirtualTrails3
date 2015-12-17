@@ -12,15 +12,12 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.viewRoute.CViewRouteCtrl;
 import fr.virtualtrails.configureRoute.viewRoute.CViewRouteM;
 import fr.virtualtrails.configureRoute.addRoute.CAddRouteCtrl;
-import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
+import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;

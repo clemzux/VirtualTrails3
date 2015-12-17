@@ -13,7 +13,7 @@ import android.widget.TextView;
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
-import fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl;
+import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.homeMap.CHomeMapM;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;

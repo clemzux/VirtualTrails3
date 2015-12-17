@@ -1,4 +1,4 @@
-package fr.virtualtrails.consultStatistics;
+package fr.virtualtrails.statistics.consultStatistics;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -23,6 +23,8 @@ public class CConsultStatisticsM {
     private ListView statList;
     private CConsultStatisticsCtrl cConsultStatisticsCtrl;
     public ArrayList<String> objectId;
+    public String[] statsNames;
+    public String[] routeNames;
 
     private CConsultStatisticsM() {
     }
@@ -40,13 +42,15 @@ public class CConsultStatisticsM {
             @Override
             public void done(List<ParseObject> objects, com.parse.ParseException e) {
 
-                String[] statsNames = new String[objects.size()];
+                statsNames = new String[objects.size()];
+                routeNames = new String[objects.size()];
                 objectId = new ArrayList<String>();
                 int i = 0;
 
                 if (e == null) {
                     for (ParseObject po : objects) {
                         statsNames[i] = po.getString("nomItineraire") + "      Créé le : " + po.getCreatedAt();
+                        routeNames[i] = po.getString("nomItineraire");
                         objectId.add(po.getObjectId());
                         i++;
                     }

@@ -1,59 +1,50 @@
-package fr.virtualtrails.homeMap;
+package fr.virtualtrails.statistics.statisticView;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.parse.Parse;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.w3c.dom.Text;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
+import fr.virtualtrails.homeMap.CHomeMapCtrl;
+import fr.virtualtrails.homeMap.CHomeMapM;
 import fr.virtualtrails.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
-public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback {
-
-    //log : farge.clement@gmail.com
-    //pass : salutcava
+public class CStatisticViewCtrl extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Spinner menu;
-    private TextView informativePart;
+    private TextView informativePart, routeName, hStart, hFinish, totDistance, averageSpeed, altMax;
 
     Intent homeMap, configureRoute, configureDisplay, launchRoute, consultStatistics, managefriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_map_gui);
+        setContentView(R.layout.statistic_view_gui);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //////////////////////////////////////
-
-        if (CHomeMapM.getInstance().isBDDinitialized()) {
-            // connection a la base de données
-            Parse.enableLocalDatastore(this);
-            Parse.initialize(this);
-
-            CHomeMapM.getInstance().setBDDinitialized();
-        }
+        /////////////////////////////////
 
         initWidgets();
         initActivity();
@@ -71,11 +62,17 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
 
     public void initWidgets(){
 
-        informativePart = (TextView) findViewById(R.id.home_informative_part);
+        informativePart = (TextView) findViewById(R.id.view_stats_informative_part);
+        routeName = (TextView) findViewById(R.id.view_stats_route_name);
+        hStart = (TextView) findViewById(R.id.view_stats_h_start);
+        hFinish = (TextView) findViewById(R.id.view_stats_h_finish);
+        totDistance = (TextView) findViewById(R.id.view_stats_total_distance);
+        averageSpeed = (TextView) findViewById(R.id.view_stats_average_speed);
+        altMax = (TextView) findViewById(R.id.view_stats_alt_max);
 
-        menu = (Spinner) findViewById(R.id.home_menu);
+        menu = (Spinner) findViewById(R.id.view_stat_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.home_menu_list, android.R.layout.simple_spinner_item);
+                R.array.consult_stat_menu_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         menu.setAdapter(adapter);
 
@@ -90,8 +87,6 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        CHomeMapM.getInstance().initHomeMapM(mMap, menu, informativePart);
     }
 
 
@@ -108,17 +103,15 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.setTrafficEnabled(true);
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setMapToolbarEnabled(false);
-        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(48.856614, 2.3522219000000177)));
-
-        if (CHomeMapM.getInstance().routeMode)
-            letsRockBaby();
+        CStatisticViewM.getInstance().setViewers(routeName, hStart, hFinish, totDistance, averageSpeed, altMax);
+        CStatisticViewM.getInstance().setMap(mMap);
+        CStatisticViewM.getInstance().readRouteStats();
+        CStatisticViewM.getInstance().readRoute();
     }
 
     public void launchActivity(int position){
@@ -126,15 +119,15 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
         switch (position){
 
             case 1 :
-                startActivity(configureDisplay);
+                startActivity(homeMap);
                 break;
 
             case 2 :
-                startActivity(managefriends);
+                startActivity(configureDisplay);
                 break;
 
             case 3 :
-                startActivity(consultStatistics);
+                startActivity(managefriends);
                 break;
 
             case 4 :
@@ -149,28 +142,5 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
                 // realité augmentée
                 break;
         }
-    }
-
-    public void letsRockBaby(){
-
-        CHomeMapM.getInstance().setMap(mMap, this);
-        CHomeMapM.getInstance().readRoute();
-    }
-
-    public void stopItNow(){
-
-        CharSequence text = "Vous avez terminé la randonnée, " +
-                "vous pourrez retrouver les statistiques dans la section \"Consulter statistiques\" !";
-
-        //CharSequence text = "Vitesse moyenne = " + CHomeMapM.getInstance().averageSpeed;
-
-        int time = Toast.LENGTH_SHORT;
-
-        Toast info = Toast.makeText(this, text, time);
-        info.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-        info.show();
-
-        CHomeMapM.getInstance().setHomeMode();
-        CHomeMapM.getInstance().saveStatistics();
     }
 }

@@ -63,7 +63,7 @@
                 android:value="fr.virtualtrails.homeMap.CHomeMapCtrl" />
         </activity>
         <activity
-            android:name=".consultStatistics.CConsultStatisticsCtrl"
+            android:name=".statistics.consultStatistics.CConsultStatisticsCtrl"
             android:label="@string/title_activity_cconsult_statistics_ctrl"
             android:parentActivityName=".homeMap.CHomeMapCtrl"
             android:theme="@style/AppTheme.NoActionBar">
@@ -108,11 +108,11 @@
         </activity>
         <activity android:name=".manageFriends.informationFriend.CInformationFriendCtrl" />
         <activity
-            android:name=".consultStatistics.statisticView.CStatisticViewCtrl"
+            android:name=".statistics.statisticView.CStatisticViewCtrl"
             android:label="@string/title_activity_cstatistic_view_ctrl">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.virtualtrails.consultStatistics.CConsultStatisticsCtrl" />
+                android:value=".statistics.consultStatistics.CConsultStatisticsCtrl" />
         </activity>
     </application>
 
