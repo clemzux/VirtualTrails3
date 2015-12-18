@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.statisticView.CStatisticViewCtrl;
 import fr.virtualtrails.statistics.statisticView.CStatisticViewM;
@@ -51,6 +52,8 @@ public class CConsultStatisticsCtrl extends AppCompatActivity {
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.consult_stat_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
         menu = (Spinner) findViewById(R.id.consult_stat_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

@@ -11,6 +11,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
+
 /**
  * Created by clemzux on 13/12/15.
  */
@@ -39,6 +41,7 @@ public class CConfigureRouteM {
     public void readRouteNames() {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("coordonees");
+        query.whereContains("pseudo", CConfigureDisplayM.getInstance().pseudo);
         query.orderByAscending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override

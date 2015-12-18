@@ -57,6 +57,7 @@ public class CViewRouteM {
         System.out.println("salut");
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("coordonees");
+        query.whereContains("pseudo", CConfigureDisplayM.getInstance().pseudo);
         query.whereContains("nomItineraire", routeName);
         query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {

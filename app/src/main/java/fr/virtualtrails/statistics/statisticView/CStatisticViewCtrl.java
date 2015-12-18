@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
@@ -60,6 +61,9 @@ public class CStatisticViewCtrl extends FragmentActivity implements OnMapReadyCa
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.view_stats_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
+
         routeName = (TextView) findViewById(R.id.view_stats_route_name);
         hStart = (TextView) findViewById(R.id.view_stats_h_start);
         hFinish = (TextView) findViewById(R.id.view_stats_h_finish);

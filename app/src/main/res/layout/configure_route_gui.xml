@@ -18,14 +18,14 @@
 
         <TextView
             android:id="@+id/conf_route_informative_part"
-            android:text="Clemzux"
+            android:text="Invité"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
     <Button
         android:id="@+id/conf_shared_add_route"
-        android:text="Go to shared Routes !"
+        android:text="Itinéraires partagés"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:onClick="OpenSharedRoutes"/>

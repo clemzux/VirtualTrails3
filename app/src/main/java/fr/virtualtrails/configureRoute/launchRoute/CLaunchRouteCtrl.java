@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
@@ -50,6 +51,8 @@ public class CLaunchRouteCtrl extends AppCompatActivity {
 
         // partie informative
         informativePart = (TextView) findViewById(R.id.launch_route_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
         // initiation de la listview qui contiendra touts les itinéraires
         launchRouteListView = (ListView) findViewById(R.id.launch_route_list_view);

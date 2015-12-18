@@ -12,6 +12,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 
 /**
@@ -41,6 +42,7 @@ public class CSharedRouteM {
     public void readSharedRoutes() {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("friendsRoutes");
+        query.whereContains("pseudo", CConfigureDisplayM.getInstance().pseudo);
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> objects, ParseException e) {
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.configureRoute.sharedRoute.CSharedRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
@@ -66,6 +67,8 @@ public class CManageFriendsCtrl extends AppCompatActivity {
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.manage_friends_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
         menu = (Spinner) findViewById(R.id.manage_friends_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -119,9 +122,6 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         }
     }
 
-    public void testbdd(View v){
-    }
-
     public void addFriends(View v){
         startActivity(addFriends);
     }
@@ -130,7 +130,4 @@ public class CManageFriendsCtrl extends AppCompatActivity {
         CInformationFriendM.getInstance().preInitViewFriend(pPseudo);
         startActivity(infoFriend);
     }
-
-
-
 }

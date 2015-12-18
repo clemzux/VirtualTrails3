@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
@@ -39,12 +40,12 @@ public class CInformationFriendCtrl extends AppCompatActivity {
         mailText = (TextView) findViewById(R.id.mailText);
         numText = (TextView) findViewById(R.id.telText);
 
-        numText.setText("4");
         infoFriend = getIntent();
 
         CInformationFriendM.getInstance().initInfos(mailText, numText);
         pseudoText.setText(CInformationFriendM.getInstance().pseudo);
         CInformationFriendM.getInstance().ReadFriends();
+
         initWidgets();
         initActivity();
     }
@@ -64,6 +65,8 @@ public class CInformationFriendCtrl extends AppCompatActivity {
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.manage_friends_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
         menu = (Spinner) findViewById(R.id.manage_friends_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

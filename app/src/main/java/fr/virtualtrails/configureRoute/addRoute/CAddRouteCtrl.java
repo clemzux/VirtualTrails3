@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
@@ -120,6 +121,9 @@ public class CAddRouteCtrl extends FragmentActivity implements OnMapReadyCallbac
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.conf_route_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
+
         routeName = (EditText) findViewById(R.id.add_route_name);
 
         menu = (Spinner) findViewById(R.id.add_route_menu);

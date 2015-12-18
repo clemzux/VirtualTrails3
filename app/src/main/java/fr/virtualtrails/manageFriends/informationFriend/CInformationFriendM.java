@@ -28,7 +28,7 @@ public class CInformationFriendM {
 
     public TextView mailText;
     public TextView numText;
-    public double numTel;
+    public int numTel;
     public String pseudo, mail;
 
     public void preInitViewFriend(String pPseudo){
@@ -52,10 +52,9 @@ public class CInformationFriendM {
                     ParseObject p;
                     p = objects.get(0);
                     mail = p.getString("mail");
-                    numTel = p.getDouble("num");
-                    Log.i("testbdd", "mail trouvé : " + mail + " numtel " + numTel);
-                    mailText.setText(p.getString("mail"));
-                    numText.setText(String.valueOf(numTel));
+                    numTel = Integer.valueOf((Integer) p.getNumber("num"));
+                    mailText.setText("0" + String.valueOf(numTel));
+                    numText.setText(mail);
 
                 } else {
                     Log.i("testbdd", "pb?");

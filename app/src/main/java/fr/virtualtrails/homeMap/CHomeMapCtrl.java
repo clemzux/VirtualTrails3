@@ -79,7 +79,6 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.home_informative_part);
-
         if (CConfigureDisplayM.getInstance().pseudoSetted)
             informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 

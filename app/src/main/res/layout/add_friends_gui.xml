@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/manage_friends_informative_part"
-            android:text="Clemzux"
+            android:text="Invité"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -28,20 +28,20 @@
         android:id="@+id/edit_pseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choisissez un pseudo "
+        android:hint="Choisissez un pseudo "
         />
     <EditText
         android:id="@+id/edit_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Num téléphone"
+        android:hint="Num téléphone"
         android:inputType="number"
         />
     <EditText
         android:id="@+id/edit_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mail "
+        android:hint="Mail "
         />
     <Button
         android:id="@+id/bouton_valider"

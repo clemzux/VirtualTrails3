@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.sharedRoute.CSharedRouteCtrl;
 import fr.virtualtrails.configureRoute.viewRoute.CViewRouteCtrl;
 import fr.virtualtrails.configureRoute.viewRoute.CViewRouteM;
@@ -65,6 +66,8 @@ public class CConfigureRouteCtrl extends AppCompatActivity {
     public void initWidgets(){
 
         informativePart = (TextView) findViewById(R.id.conf_route_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
         // remplissage menu
 
