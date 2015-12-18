@@ -12,12 +12,12 @@
         android:layout_margin="10dp">
 
         <Spinner
-            android:id="@+id/view_route_menu"
+            android:id="@+id/viewed_route_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/view_route_informative_part"
+            android:id="@+id/viewed_route_informative_part"
             android:text="Invité"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -35,16 +35,16 @@
             android:text="Nom Itinéraire : "/>
 
         <TextView
-            android:id="@+id/view_route_name"
+            android:id="@+id/viewed_route_name"
             android:layout_width="130dp"
             android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/view_route_share"
-            android:text="Partager"
+            android:id="@+id/viewed_route_share"
+            android:text="Démarrer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="shareRoute"/>
+            android:onClick="launchRoute"/>
 
     </LinearLayout>
 

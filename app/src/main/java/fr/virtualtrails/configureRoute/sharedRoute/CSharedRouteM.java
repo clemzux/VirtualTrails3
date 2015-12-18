@@ -18,9 +18,6 @@ import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
  * Created by boblinux on 17/12/15.
  */
 public class CSharedRouteM {
-    public ArrayList<String> routeList = null;
-    ListView lst;
-    CSharedRouteCtrl cSharedRouteCtrl;
 
     private static CSharedRouteM ourInstance = new CSharedRouteM();
 
@@ -31,41 +28,41 @@ public class CSharedRouteM {
     private CSharedRouteM() {
     }
 
-    public void initConfigureRouteM(ListView list, CSharedRouteCtrl pSharedRouteCtrl) {
+    String[] routeList;
+    String[] friends;
+    ListView lst;
+    CSharedRouteCtrl cSharedRouteCtrl;
 
-        lst = list;
-        cSharedRouteCtrl = pSharedRouteCtrl;
+    public void initShareRouteM(ListView pList, CSharedRouteCtrl pCSharedRouteCtrl){
+       lst = pList;
+        cSharedRouteCtrl = pCSharedRouteCtrl;
     }
 
-    public void readRouteNames() {
+    public void readSharedRoutes() {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("friendsRoutes");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> objects, ParseException e) {
 
-                routeList = new ArrayList<String>();
-
                 if (e == null) {
 
                     ParseObject p;
+                    friends = new String[objects.size()];
+                    routeList = new String[objects.size()];
+                    String[] onScreen = new String[objects.size()];
 
                     for (int i = 0; i < objects.size(); i++) {
                         p = objects.get(i);
-                        routeList.add(p.getString("routeName"));
+                        routeList[i] = p.getString("routeName");
+                        friends[i] = p.getString("pseudo");
+                        onScreen[i] = "Nom itinéraire : " + p.getString("routeName") + "     Créé par : " + p.getString("pseudo");
                     }
-                } else {
-                    Log.i("testbdd", "pb?");
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(cSharedRouteCtrl, android.R.layout.simple_list_item_1,
+                            onScreen);
+
+                    lst.setAdapter(adapter);
                 }
-
-                String[] friends = new String[routeList.size()];
-                int i = 0;
-                for (String s : routeList)
-                    friends[i++] = s;
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(cSharedRouteCtrl, android.R.layout.simple_list_item_1,
-                        friends);
-
-                lst.setAdapter(adapter);
             }
         });
     }

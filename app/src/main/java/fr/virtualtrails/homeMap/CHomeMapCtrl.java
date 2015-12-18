@@ -186,7 +186,7 @@ public class CHomeMapCtrl extends FragmentActivity implements OnMapReadyCallback
 
         //CharSequence text = "Vitesse moyenne = " + CHomeMapM.getInstance().averageSpeed;
 
-        int time = Toast.LENGTH_SHORT;
+        int time = Toast.LENGTH_LONG;
 
         Toast info = Toast.makeText(this, text, time);
         info.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);

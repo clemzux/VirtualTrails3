@@ -92,6 +92,7 @@ public class CConfigureDisplayCtrl extends AppCompatActivity {
 
                 CConfigureDisplayM.getInstance().setDisplayModel(String.valueOf(pseudo.getText()), speed.isChecked(),
                         totalDistance.isChecked(), altitude.isChecked(), distanceRemaining.isChecked());
+                startActivity(homeMap);
             }
         });
     }

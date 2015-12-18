@@ -27,7 +27,7 @@
         android:id="@+id/disp_pseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrez votre pseudo "
+        android:hint="Entrez votre pseudo"
         />
 
     <TextView

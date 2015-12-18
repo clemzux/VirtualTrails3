@@ -119,6 +119,13 @@
                 android:value=".statistics.consultStatistics.CConsultStatisticsCtrl" />
         </activity>
         <activity android:name=".configureRoute.sharedRoute.CSharedRouteCtrl" />
+        <activity
+            android:name=".configureRoute.sharedRoute.CViewSharedRoutesCtrl"
+            android:label="@string/title_activity_cview_shared_routes_ctrl">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.virtualtrails.configureRoute.sharedRoute.CSharedRouteCtrl" />
+        </activity>
     </application>
 
 </manifest>

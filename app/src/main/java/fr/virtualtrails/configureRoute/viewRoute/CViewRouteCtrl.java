@@ -128,7 +128,12 @@ public class CViewRouteCtrl extends FragmentActivity implements OnMapReadyCallba
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
-        CViewRouteM.getInstance().initViewRoute(mMap);
+        CViewRouteM.getInstance().initViewRoute(mMap, this);
         CViewRouteM.getInstance().readRoute();
+    }
+
+    public void shareRoute(View v){
+
+        CViewRouteM.getInstance().shareRouteBDD();
     }
 }

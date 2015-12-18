@@ -12,20 +12,20 @@
         android:layout_margin="10dp">
 
         <Spinner
-            android:id="@+id/shared_friends_menu"
+            android:id="@+id/share_route_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/manage_friends_informative_part"
-            android:text="Clemzux"
+            android:id="@+id/share_route_informative_part"
+            android:text="Invité"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/share_route_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

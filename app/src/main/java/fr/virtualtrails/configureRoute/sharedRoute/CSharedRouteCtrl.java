@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import fr.virtualtrails.R;
 import fr.virtualtrails.configureDisplay.CConfigureDisplayCtrl;
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
 import fr.virtualtrails.configureRoute.configureRoute.CConfigureRouteCtrl;
+import fr.virtualtrails.configureRoute.viewRoute.CViewSharedRoutesM;
 import fr.virtualtrails.homeMap.CHomeMapCtrl;
 import fr.virtualtrails.configureRoute.launchRoute.CLaunchRouteCtrl;
 import fr.virtualtrails.homeMap.CHomeMapM;
@@ -22,33 +24,24 @@ import fr.virtualtrails.manageFriends.manageFriend.CManageFriendsCtrl;
 import fr.virtualtrails.statistics.consultStatistics.CConsultStatisticsCtrl;
 
 public class CSharedRouteCtrl extends AppCompatActivity {
+
     private Spinner menu;
     private TextView informativePart;
 
-    ListView mListView;
+    ListView shareRouteListView;
     Intent homeMap, configureRoute, configureDisplay,
             launchRoute, consultStatistics, managefriends,
-            addFriends, infoFriend, sharedFriend;
+            addFriends, infoFriend, sharedFriend, viewSharedRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shared_route_gui);
 
-        mListView = (ListView) findViewById(R.id.listView);
-
         sharedFriend = getIntent();
-        CSharedRouteM.getInstance().initConfigureRouteM(mListView, this);
-        CSharedRouteM.getInstance().readRouteNames();
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchRouteAtHomeActivity((String) parent.getItemAtPosition(position));
-            }
-        });
-        //initWidgets();
-        //initActivity();
 
+        initActivity();
+        initWidgets();
     }
 
     public void initActivity(){
@@ -62,15 +55,18 @@ public class CSharedRouteCtrl extends AppCompatActivity {
         addFriends = new Intent(this, CAddFriendsCtrl.class);
         infoFriend = new Intent(this, CInformationFriendCtrl.class);
         sharedFriend = new Intent(this, CSharedRouteCtrl.class );
+        viewSharedRoute = new Intent(this, CViewSharedRoutesCtrl.class);
     }
 
     public void initWidgets(){
 
-        informativePart = (TextView) findViewById(R.id.manage_friends_informative_part);
+        informativePart = (TextView) findViewById(R.id.share_route_informative_part);
+        if (CConfigureDisplayM.getInstance().pseudoSetted)
+            informativePart.setText(CConfigureDisplayM.getInstance().pseudo);
 
-        menu = (Spinner) findViewById(R.id.manage_friends_menu);
+        menu = (Spinner) findViewById(R.id.share_route_menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.manage_friends_menu_list, android.R.layout.simple_spinner_item);
+                R.array.conf_route_menu_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         menu.setAdapter(adapter);
 
@@ -86,8 +82,22 @@ public class CSharedRouteCtrl extends AppCompatActivity {
             }
         });
 
-        //a completer
-        //CConfigureDisplay.getIns....
+        shareRouteListView = (ListView) findViewById(R.id.share_route_listView);
+        CSharedRouteM.getInstance().initShareRouteM(shareRouteListView, this);
+        CSharedRouteM.getInstance().readSharedRoutes();
+
+        shareRouteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                launchViewShareRoute(CSharedRouteM.getInstance().routeList[position]);
+            }
+        });
+    }
+
+    public void launchViewShareRoute(String routeName){
+
+        CViewSharedRoutesM.getInstance().preInitSharedViewRoute(routeName);
+        startActivity(viewSharedRoute);
     }
 
     public void launchActivity(int position){
@@ -118,9 +128,5 @@ public class CSharedRouteCtrl extends AppCompatActivity {
                 // realité augmentée
                 break;
         }
-    }
-    public void launchRouteAtHomeActivity(String pRouteName){
-        CHomeMapM.getInstance().setRouteMode(pRouteName);
-        startActivity(homeMap);
     }
 }

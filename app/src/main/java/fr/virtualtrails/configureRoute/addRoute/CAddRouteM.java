@@ -17,6 +17,8 @@ import com.parse.ParseObject;
 
 import java.util.ArrayList;
 
+import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
+
 /**
  * Created by clemzux on 13/12/15.
  */
@@ -144,6 +146,7 @@ public class CAddRouteM {
             for (MarkerOptions m : mo) {
 
                 wp = new ParseObject("coordonees");
+                wp.put("pseudo", CConfigureDisplayM.getInstance().pseudo);
                 wp.put("nomItineraire", nameRoute);
                 wp.put("latitude", m.getPosition().latitude);
                 wp.put("longitude", m.getPosition().longitude);

@@ -1,8 +1,6 @@
 package fr.virtualtrails.configureRoute.viewRoute;
 
 import android.graphics.Color;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,15 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.virtualtrails.configureDisplay.CConfigureDisplayM;
+import fr.virtualtrails.configureRoute.sharedRoute.CViewSharedRoutesCtrl;
 
 /**
  * Created by clemzux on 15/12/15.
  */
 
-public class CViewRouteM {
-    private static CViewRouteM ourInstance = new CViewRouteM();
+public class CViewSharedRoutesM {
+    private static CViewSharedRoutesM ourInstance = new CViewSharedRoutesM();
 
-    public static CViewRouteM getInstance() {
+    public static CViewSharedRoutesM getInstance() {
         return ourInstance;
     }
 
@@ -37,24 +36,22 @@ public class CViewRouteM {
     ArrayList<MarkerOptions> routeList;
     public PolylineOptions plo = new PolylineOptions();
     public Polyline pl;
-    public CViewRouteCtrl cViewRouteCtrl;
+    public CViewSharedRoutesCtrl cViewSharedRoutesCtrl;
 
-    private CViewRouteM() {
+    private CViewSharedRoutesM() {
     }
 
-    public void preInitViewRoute(String pName){
+    public void preInitSharedViewRoute(String pName){
         routeName = pName;
     }
 
-    public void initViewRoute(GoogleMap pMap, CViewRouteCtrl pCViewRouteCtrl){
+    public void initViewRoute(GoogleMap pMap, CViewSharedRoutesCtrl pCViewSharedRoutesCtrl){
 
         mMap = pMap;
-        cViewRouteCtrl = pCViewRouteCtrl;
+        cViewSharedRoutesCtrl = pCViewSharedRoutesCtrl;
     }
 
     public void readRoute(){
-
-        System.out.println("salut");
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("coordonees");
         query.whereContains("nomItineraire", routeName);
@@ -109,24 +106,5 @@ public class CViewRouteM {
         }
 
         pl.setPoints(plo.getPoints());
-    }
-
-    public void shareRouteBDD(){
-
-        ParseObject wp;
-
-        wp = new ParseObject("friendsRoutes");
-        wp.put("pseudo", CConfigureDisplayM.getInstance().pseudo);
-        wp.put("routeName", routeName);
-        wp.saveInBackground();
-
-        CharSequence text = "L'itinéraire a été partagé !";
-
-        int time = Toast.LENGTH_SHORT;
-
-        Toast info = Toast.makeText(cViewRouteCtrl, text, time);
-        info.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-        info.show();
-
     }
 }
